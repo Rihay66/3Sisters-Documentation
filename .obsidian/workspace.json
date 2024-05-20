@@ -1,0 +1,200 @@
+{
+  "main": {
+    "id": "244fe80589cea58c",
+    "type": "split",
+    "children": [
+      {
+        "id": "7a90fea5c96570c3",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "5f7bad9197d9029d",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Project-Heaven.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          }
+        ]
+      },
+      {
+        "id": "8cd4fe2365d85375",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "1050bce83f268aa1",
+            "type": "leaf",
+            "pinned": true,
+            "state": {
+              "type": "graph",
+              "state": {},
+              "pinned": true
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "4b0b2b704fa804f4",
+    "type": "split",
+    "children": [
+      {
+        "id": "a8f788d8c3d996cb",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "5f53c115005f3731",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "7f365f1125a524a6",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "cf90618c1a1ee969",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "7937d82759400221",
+    "type": "split",
+    "children": [
+      {
+        "id": "34e73b208679cf27",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "0af9086cdca88ef3",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "Project-Heaven.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "874e2466e3177092",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "Project-Heaven.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "b9cb76a58b69e3e2",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              }
+            }
+          },
+          {
+            "id": "eb748522cb6daa72",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "Project-Heaven.md"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "templates:Insert template": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "command-palette:Open command palette": false
+    }
+  },
+  "active": "1050bce83f268aa1",
+  "lastOpenFiles": [
+    "Project-Heaven.md",
+    "Engine/Heaven-Engine.md",
+    "Usage/Usage.md",
+    "Tutorial/Tutorial.md",
+    "Engine/Window/Window.md",
+    "Engine/Utilities/Utilities.md",
+    "Engine/SoundComponents/Sound Components.md",
+    "Engine/ResourceSystems/Resource Systems.md",
+    "Engine/GameObjects/Game Objects.md",
+    "Engine/Engine/Engine.md",
+    "Engine/Cameras/Cameras.md",
+    "Tutorial",
+    "Usage",
+    "Engine/Utilities",
+    "Engine/SoundComponents",
+    "Engine/Untitled.canvas",
+    "Engine/ResourceSystems",
+    "Engine/Cameras",
+    "Engine/GameObjects",
+    "Engine/Engine",
+    "Engine/Window",
+    "Engine",
+    "Heaven-Engine/Source Code.md",
+    "Heaven-Engine/RoadMap.canvas",
+    "Heaven-Engine/GameObject.md",
+    "Heaven-Engine/C++ Header Files.md",
+    "Heaven-Engine/C or C++.md",
+    "Physics.md",
+    "PhysicsObject.md",
+    "Main.md",
+    "RoadMap.md",
+    "Source.md"
+  ]
+}
