@@ -6,6 +6,7 @@
       {
         "id": "7a90fea5c96570c3",
         "type": "tabs",
+        "dimension": 59.80538922155688,
         "children": [
           {
             "id": "5f7bad9197d9029d",
@@ -13,7 +14,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Project-Heaven.md",
+                "file": "Engine/Heaven-Engine.md",
                 "mode": "source",
                 "source": false
               }
@@ -24,6 +25,7 @@
       {
         "id": "8cd4fe2365d85375",
         "type": "tabs",
+        "dimension": 40.19461077844311,
         "children": [
           {
             "id": "1050bce83f268aa1",
@@ -101,7 +103,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Project-Heaven.md",
+                "file": "Engine/Heaven-Engine.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -118,7 +120,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Project-Heaven.md",
+                "file": "Engine/Heaven-Engine.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -141,7 +143,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Project-Heaven.md"
+                "file": "Engine/Heaven-Engine.md"
               }
             }
           }
@@ -159,10 +161,11 @@
       "graph:Open graph view": false,
       "canvas:Create new canvas": false,
       "daily-notes:Open today's daily note": false,
-      "command-palette:Open command palette": false
+      "command-palette:Open command palette": false,
+      "webpage-html-export:Export Vault to HTML": false
     }
   },
-  "active": "1050bce83f268aa1",
+  "active": "5f7bad9197d9029d",
   "lastOpenFiles": [
     "Project-Heaven.md",
     "Engine/Heaven-Engine.md",

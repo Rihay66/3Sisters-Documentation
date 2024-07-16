@@ -1,5 +1,5 @@
 Introduction:
-Is a graphics engine library that currently has 2D graphics capabilities. The engine uses mainly the OpenGL API for rendering graphics. As of current version of the engine contains other additional libraries that further it's capabilities:
+Is a graphics engine library written in C/C++ that currently has 2D graphics capabilities. The engine uses mainly the OpenGL API for rendering graphics. As of current version of the engine contains other additional libraries that further it's capabilities:
 
 Libraries:
 * GLFW - For displaying a context window which allows OpenGL to render graphics.
