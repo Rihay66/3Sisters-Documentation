@@ -1,4 +1,5 @@
-To understand the engine let's first understand each of its components in the order of their importance:
+To understand the engine let's understand how it operates:
+(explain what it mainly uses: static singletons, ECS, and inheritance, and virtual functions)
 
 # [[Window]] 
 This component allows for direct/indirect functionality of other components within the engine such as 

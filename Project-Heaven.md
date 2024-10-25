@@ -10,9 +10,12 @@ Libraries:
 * SndFile - For loading images
 * Free type  - For font loading
 
-(State what to know before using the engine)
+Why:
+I've used the Unity Engine since 7th grade. I've used the engine on small projects and then on competitive club projects that have won trophies. I have struggled and grown tired with the software which made it very unpleasant to work with when working on solo projects or getting things done. I've seen a growing number of custom engines made by small developers and observed their workflow. After experimenting in creating a custom engine I've started to enjoy working on it and creating small demos when using it.
 
-(State reasons to learn about this engine and use it)
+There main reason someone else would use this is to use it as a learning example as the engine is sort of representative of how engine's "from scratch" would be constructed. If considered to be used creating an application, due note there will be things you'll have to make yourself as the engine only covers boilerplate components such as Window, Renderer, and other.
+
+Before starting I highly recommend to learn about OpenGL, plenty of C and C++, and understand the basics of graphics as well on your own make a game, and if you don't know where to start I started with https://learnopengl.com/ 
 
 Getting to know the engine:
 [[3 Sisters-Engine]]
@@ -20,6 +23,6 @@ Getting to know the engine:
 Getting started with engine:
 [[Usage]]
 
-Creating with the [[3 Sisters-Engine]]
+Creating with the [[3 Sisters-Engine]]:
 [[Tutorial]]
 
