@@ -4,39 +4,37 @@
     "type": "split",
     "children": [
       {
-        "id": "7a90fea5c96570c3",
+        "id": "bae8b7009aa72195",
         "type": "tabs",
-        "dimension": 68.21065989847715,
+        "dimension": 69.1919191919192,
         "children": [
           {
-            "id": "5f7bad9197d9029d",
+            "id": "6690658558e60ba3",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Engine/ECS/src/System.md",
+                "file": "Engine/3 Sisters-Engine.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "System"
+              "title": "3 Sisters-Engine"
             }
           }
         ]
       },
       {
-        "id": "8cd4fe2365d85375",
+        "id": "09632aaa7afcb009",
         "type": "tabs",
-        "dimension": 31.78934010152285,
+        "dimension": 30.80808080808081,
         "children": [
           {
-            "id": "1050bce83f268aa1",
+            "id": "2ef2c09df302c78e",
             "type": "leaf",
-            "pinned": true,
             "state": {
               "type": "graph",
               "state": {},
-              "pinned": true,
               "icon": "lucide-git-fork",
               "title": "Graph view"
             }
@@ -97,7 +95,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 291.5
   },
   "right": {
     "id": "7937d82759400221",
@@ -185,7 +183,6 @@
   },
   "left-ribbon": {
     "hiddenItems": {
-      "webpage-html-export:Export Vault to HTML": false,
       "switcher:Open quick switcher": false,
       "templates:Insert template": false,
       "graph:Open graph view": false,
@@ -194,28 +191,34 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "5f7bad9197d9029d",
+  "active": "2ef2c09df302c78e",
   "lastOpenFiles": [
-    "Engine/ECS/src/Component.md",
-    "Engine/ECS/src/System.md",
-    "Engine/ECS/src/Entity.md",
-    "Engine/ECS/ECS.md",
-    "Engine/ECS/src",
-    "Engine/Input/Input.md",
-    "Project-Heaven.md",
-    "Usage/Usage.md",
     "Engine/3 Sisters-Engine.md",
     "Engine/Window/Window.md",
+    "Engine/Sound/Sound.md",
+    "Engine/ResourceSystems/Resource Systems.md",
+    "Engine/ResourceSystems/src/Sound Manager.md",
+    "Engine/ResourceSystems/src/Tag System.md",
+    "Engine/ResourceSystems/src/Resource Manager.md",
+    "Tutorial/Tutorial.md",
+    "Project-Heaven.md",
+    "Engine/Sound/src/Sound Source.md",
+    "Engine/Sound/src/Sound Buffer.md",
+    "Engine/Sound/src/Sound Device.md",
+    "Engine/ECS/ECS.md",
+    "Usage/Usage.md",
+    "Engine/ECS/src/System.md",
+    "Engine/ECS/src/Component.md",
+    "Engine/ECS/src/Entity.md",
+    "Engine/ECS/src",
+    "Engine/Input/Input.md",
     "Engine/Window/src/Window-SDL.md",
     "Engine/Window/src/Window-GLFW.md",
     "Engine/Window/src",
-    "Engine/Sound/src/Sound Source.md",
     "Engine/Sound/src",
-    "Engine/Sound/Sound.md",
     "Engine/Sound",
     "Engine/ResourceSystems/src/Texture.md",
     "Engine/ResourceSystems/src/Shader.md",
-    "Engine/ResourceSystems/src/Resource Manager.md",
     "Engine/ResourceSystems/src",
     "Engine/Input/src/GLFW keyboard.md",
     "Engine/Input/src/GLFW Gamepad.md",
@@ -223,15 +226,9 @@
     "Engine/Input",
     "Engine/Engine/src/Text Renderer.md",
     "Engine/Engine/src/Sprite Renderer.md",
-    "Engine/Engine/src/Physics.md",
     "Engine/Engine/src",
     "Engine/ECS",
-    "Engine/Cameras/src/Orthographic Camera.md",
     "Engine/Cameras/src",
-    "Engine/Heaven-Engine.md",
-    "Tutorial/Tutorial.md",
-    "Engine/Utilities/Utilities.md",
-    "Engine/SoundComponents/Sound Components.md",
     "Engine/Untitled.canvas",
     "Heaven-Engine/RoadMap.canvas"
   ]
