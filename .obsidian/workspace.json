@@ -183,6 +183,7 @@
   },
   "left-ribbon": {
     "hiddenItems": {
+      "webpage-html-export:Export Vault to HTML": false,
       "switcher:Open quick switcher": false,
       "templates:Insert template": false,
       "graph:Open graph view": false,
