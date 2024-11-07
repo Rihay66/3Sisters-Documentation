@@ -1,5 +1,4 @@
 # ignore obidian 
-.obsidian/
-.obisdian/**
-.obsidian
-/.obsidian
+.*
+!/.gitignore
+
