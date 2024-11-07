@@ -56,7 +56,17 @@ For quick reference, here are the Static Singleton Classes in the engine:
 # ECS
 The Entity Component System ([[ECS]]) is a different approach to representing objects or "GameObjects" and using them to keep track and allow for some functionality. Despite its performance benefits, though its design and usage requires a lot more thinking and even getting used to if you've been used to OOP. This general information should give enough information to start thinking about and not only that there will be examples and tutorials showing its usage.
 
-### Entity
+[[ECS]] is a Static Singleton Class meaning it needs to be initialized before use
+
+```cpp
+#include <ecs/ecs.hpp>
+
+void func(){
+	// initialize ECS
+	ECS::Init();
+}
+```
+### [[Entity]]
 An Entity is represented as an ID, a number like 2 or 19, that is "linked" to an array of components like a position or texture component. This can be used to logically represent a Player, a UI element, or an Item.
 
 Entity is of type unsigned integer of 32-bit, the name "Entity" is an alias that points to that type. Thus declaring an Entity is the same as declaring said mentioned type.
@@ -72,7 +82,8 @@ std::uint32_t u;
 
 In ECS system handles giving an entity an ID, attaching components, and allow those entities with certain components (called a signature) that are used by systems.
 
-To create an Entity in code it would look like so:
+To create an Entity in code it would look like so
+
 ``` cpp
 #include <ecs/ecs.hpp>
 
@@ -83,30 +94,79 @@ void func(){
 ```
 
 Since the "CreateEntity()" returns an entity which can be used to keep track of that entity
+
 ``` cpp
 #include <ecs/ecs.hpp>
 
 void func(){
 	// create an entity
-	Entity e = ECS::CreateEntity();
+	Entity entity = ECS::CreateEntity();
 	
-	// do something with 'e'
+	// do something with 'entity'
 	// ...
 }
 ```
-### Component
-A Component is represented as a data structure that only contains variables. So to create a component it would look likes this:
+### [[Component]]
+A Component is represented as a data structure that only contains data. So to create a component it would look likes this:
 
 ```cpp
-// example component with variables
-struct component{
+// example component with data
+struct Component{
 	int value;
 	float timer;
 };
 ```
 
-These data structures can be attached to entities which can then be used to represent the data of an entity (rework the wording on this)
-### System
+These components can be attached to an entity or numerous entities. Each entity can have the same component but they'll have a different instance of that same component, meaning similar components attached to different entities don't affect each other when a change only happens to one component or entity.
+
+In the [[ECS]] the component that going to be used must be registered in order for the components to be used and [[System]]s to work properly, can be done so by using "RegisterComponent<>()"
+
+```cpp
+#include <ecs/ecs.hpp>
+
+// example component with data
+struct ComponentExample{
+	int value;
+	float size;
+};
+
+void func(){
+	// initialize ECS
+	
+	// register components
+	ECS::RegisterComponent<ComponentExample>();
+}
+
+```
+
+To attach a component to a entity
+```cpp
+#include <ecs/ecs.hpp>
+
+// example component with data
+struct Component{
+	int value;
+	float size;
+};
+
+void func(){
+	// Initialize ECS
+	// register components
+	
+	// create an entity
+	Entity entity = ECS::CreateEntity();
+	
+	//Attach component to entity
+	ECS::AddComponent(entity, Component{});
+}
+
+
+```
+
+Due note that entities have a maximum amount of components they can have as well duplicate of the same components added to an entity causes no change.
+
+To remove a component
+### [[System]]
 
 ### Putting it all together
 

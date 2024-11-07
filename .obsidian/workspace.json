@@ -6,7 +6,6 @@
       {
         "id": "bae8b7009aa72195",
         "type": "tabs",
-        "dimension": 69.1919191919192,
         "children": [
           {
             "id": "6690658558e60ba3",
@@ -20,23 +19,6 @@
               },
               "icon": "lucide-file",
               "title": "3 Sisters-Engine"
-            }
-          }
-        ]
-      },
-      {
-        "id": "09632aaa7afcb009",
-        "type": "tabs",
-        "dimension": 30.80808080808081,
-        "children": [
-          {
-            "id": "2ef2c09df302c78e",
-            "type": "leaf",
-            "state": {
-              "type": "graph",
-              "state": {},
-              "icon": "lucide-git-fork",
-              "title": "Graph view"
             }
           }
         ]
@@ -183,7 +165,6 @@
   },
   "left-ribbon": {
     "hiddenItems": {
-      "webpage-html-export:Export Vault to HTML": false,
       "switcher:Open quick switcher": false,
       "templates:Insert template": false,
       "graph:Open graph view": false,
@@ -192,10 +173,10 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "2ef2c09df302c78e",
+  "active": "6690658558e60ba3",
   "lastOpenFiles": [
-    "Engine/3 Sisters-Engine.md",
     "Engine/Window/Window.md",
+    "Engine/3 Sisters-Engine.md",
     "Engine/Sound/Sound.md",
     "Engine/ResourceSystems/Resource Systems.md",
     "Engine/ResourceSystems/src/Sound Manager.md",
