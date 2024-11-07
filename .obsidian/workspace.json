@@ -20,6 +20,16 @@
               "icon": "lucide-file",
               "title": "3 Sisters-Engine"
             }
+          },
+          {
+            "id": "a014dd00d5be7032",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
+            }
           }
         ]
       }
@@ -175,8 +185,8 @@
   },
   "active": "6690658558e60ba3",
   "lastOpenFiles": [
-    "Engine/Window/Window.md",
     "Engine/3 Sisters-Engine.md",
+    "Engine/Window/Window.md",
     "Engine/Sound/Sound.md",
     "Engine/ResourceSystems/Resource Systems.md",
     "Engine/ResourceSystems/src/Sound Manager.md",

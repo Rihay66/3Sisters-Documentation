@@ -1,4 +1,5 @@
 # ignore obidian 
 .obsidian/
-.obisdian/*
+.obisdian/**
+.obsidian
 /.obsidian
