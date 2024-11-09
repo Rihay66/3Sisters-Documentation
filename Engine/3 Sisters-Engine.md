@@ -156,16 +156,47 @@ void func(){
 	// create an entity
 	Entity entity = ECS::CreateEntity();
 	
-	//Attach component to entity
+	// attach component to entity
 	ECS::AddComponent(entity, Component{});
 }
 
 
 ```
 
-Due note that entities have a maximum amount of components they can have as well duplicate of the same components added to an entity causes no change.
+Due note that entities have a maximum amount of components they can have as well duplicate of the same components added or removed to an entity causes no change.
 
 To remove a component
+
+```cpp
+#include <ecs/ecs.hpp>
+
+// example component with data
+struct Component{
+	int value;
+	float size;
+};
+
+void func(){
+	// Initialize ECS
+	// register components
+	
+	// create an entity
+	Entity entity = ECS::CreateEntity();
+	
+	// attach component to entity
+	ECS::AddComponent(entity, Component{});
+	
+	// remove component to entity
+	ECS::RemoveComponent<Component>(entity);
+}
+```
+
+To access component of an entity there are many ways to grab and change things of the component, here's a few examples of that
+
+```cpp
+
+   
+```
 ### [[System]]
 
 ### Putting it all together
@@ -178,7 +209,7 @@ This component allows for direct/indirect functionality of other components with
 # [[Engine]]
 # [[ECS]]
 # [[Resource Systems]]
-# [[Engine/Sound/Sound]] 
+# [[Sound]] 
 # [[Input]]
 
 After examining and going over each of the components of the engine, you should be ready to start
