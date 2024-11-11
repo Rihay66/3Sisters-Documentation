@@ -38,7 +38,6 @@ void func(){
 	// initialize sprite renderer with a shader and a custom 2D sprite size 
 	SpriteRenderer::Init(shader, {15.0f, 60.0f});
 }
-
 ```
 
 Throughout the Documentation of this engine, each the components that are Static Singleton Classes are labelled.
@@ -54,7 +53,7 @@ For quick reference, here are the Static Singleton Classes in the engine:
 * [[GLFW Gamepad]]
 * [[GLFW keyboard]]
 # ECS
-The Entity Component System ([[ECS]]) is a different approach to representing objects or "GameObjects" and using them to keep track and allow for some functionality. Despite its performance benefits, though its design and usage requires a lot more thinking and even getting used to if you've been used to OOP. This general information should give enough information to start thinking about and not only that there will be examples and tutorials showing its usage.
+The Entity Component System ([[ECS]]) is a different approach to representing objects or "GameObjects" and using them to keep track and allow for some functionality. Despite its performance benefits, though its design and usage requires a lot more thinking and even getting used to if you've been used to OOP. This general information should give enough information to start thinking about and not only that there will be examples and tutorials showing its usage and application.
 
 [[ECS]] is a Static Singleton Class meaning it needs to be initialized before use
 
@@ -136,15 +135,14 @@ void func(){
 	// register components
 	ECS::RegisterComponent<ComponentExample>();
 }
-
 ```
 
-To attach a component to a entity
+To attach a component to a entity using "AddComponent()"
 ```cpp
 #include <ecs/ecs.hpp>
 
 // example component with data
-struct Component{
+struct ComponentExample{
 	int value;
 	float size;
 };
@@ -157,21 +155,16 @@ void func(){
 	Entity entity = ECS::CreateEntity();
 	
 	// attach component to entity
-	ECS::AddComponent(entity, Component{});
+	ECS::AddComponent(entity, ComponentExample{});
 }
-
-
 ```
 
-Due note that entities have a maximum amount of components they can have as well duplicate of the same components added or removed to an entity causes no change.
-
-To remove a component
-
+It is also possible to set values of a component right when adding the component to the entity
 ```cpp
 #include <ecs/ecs.hpp>
 
 // example component with data
-struct Component{
+struct ComponentExample{
 	int value;
 	float size;
 };
@@ -184,21 +177,83 @@ void func(){
 	Entity entity = ECS::CreateEntity();
 	
 	// attach component to entity
-	ECS::AddComponent(entity, Component{});
+	ECS::AddComponent(entity, ComponentExample{.value = 10, .size = 2.0f});
+}
+```
+
+Due note that entities have a maximum amount of components they can have as well duplicate of the same components added or removed to an entity causes an error message but no compilation or runtime error occurs. 
+
+To remove a component using "RemoveComponent()"
+```cpp
+#include <ecs/ecs.hpp>
+
+// example component with data
+struct ComponentExample{
+	int value;
+	float size;
+};
+
+void func(){
+	// Initialize ECS
+	// register components
+	
+	// create an entity
+	Entity entity = ECS::CreateEntity();
+	
+	// attach component to entity
+	ECS::AddComponent(entity, ComponentExample{});
 	
 	// remove component to entity
-	ECS::RemoveComponent<Component>(entity);
+	ECS::RemoveComponent<ComponentExample>(entity);
 }
 ```
 
-To access component of an entity there are many ways to grab and change things of the component, here's a few examples of that
+To access component of an entity there are many ways to grab and change things of the component, here's a few examples of that using "GetComponent()"
 
 ```cpp
+#include <ecs/ecs.hpp>
 
-   
+// example component with data
+struct ComponentExample{
+	int value;
+	float size;
+};
+
+void func(){
+	// Initialize ECS
+	// register components
+	// create an entity
+	// attach ComponentExample to entity
+	
+	// take reference of the component in Entity
+	ComponentExample& component = ECS::GetComponent<ComponentExample>(entity);
+	
+	// modify component of the entity
+	component.value += 30;
+} 
+```
+
+```cpp
+#include <ecs/ecs.hpp>
+
+// example component with data
+struct ComponentExample{
+	int value;
+	float size;
+};
+
+void func(){
+	// Initialize ECS
+	// register components
+	// create an entity
+	// attach ComponentExample to entity
+	
+	// get component from entity and modify directly
+	ECS::GetComponent<ComponentExample>(entity).size -= 1.0f;
+} 
 ```
 ### [[System]]
-
+A System is sort of a manager that is able to access to all entities but selects specific entities depending if they have all the required components or signatures.
 ### Putting it all together
 
 # Inheritance and Virtual Functions
