@@ -343,9 +343,20 @@ void func() {
 # Inheritance and Virtual Functions
 
 # [[Window]] 
-This component allows for direct/indirect functionality of other components within the engine such as 
-# [[Cameras]]
-# [[Engine]]
+The Window class is responsible for creating a OpenGL context window which allows for direct/indirect functionality of other components within the engine such as the [[Sprite Renderer]]. 
+
+Not only does this class provide a OpenGL context window it also provides a runtime function that keeps the context window open, provide (explain the pattern of the functions in Window like init, update, stepupdate, and render)
+
+Furthermore, this class is intended and meant to be inherited because the functionality it provides needs to be arbitrarily defined. 
+
+For example, when defining a what happens every frame we need to override "Update()" that is in the [[Window]] class and give it a definition
+```cpp
+void ExampleWindow::Update(){
+	// update logical systems every frame
+}
+```
+
+# [[Cameras]] 
 # [[ECS]]
 # [[Resource Systems]]
 # [[Sound]] 
