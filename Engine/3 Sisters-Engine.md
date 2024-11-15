@@ -341,7 +341,7 @@ void func() {
 }
 ```
 # Inheritance and Virtual Functions
-
+The following modules are the classes that either optional or need to be inherited and its functions overwritten to allow for some functionality.
 # [[Window]] 
 The Window class is responsible for creating a OpenGL context window which allows for direct/indirect functionality of other components within the engine such as the [[Sprite Renderer]]. 
 
@@ -357,9 +357,6 @@ void ExampleWindow::Update(){
 ```
 
 # [[Cameras]] 
-# [[ECS]]
-# [[Resource Systems]]
-# [[Sound]] 
-# [[Input]]
+(Explain the that changing how projectionview is calculated is optional)
 
 After examining and going over each of the module of the engine, you should be ready to start
