@@ -1,6 +1,4 @@
-To understand the engine let's understand how it operates:
-(explain what it mainly uses: static singletons, ECS, and inheritance, and virtual functions)
-
+To understand the engine let's understand how it contains and operates:
 # Static-Singletons
 Resource/Functional modules of the engine are Static Singletons Classes where their resources are stored statically and automatically freed without any explicit function call.
 
@@ -345,9 +343,9 @@ The following modules are the classes that either optional or need to be inherit
 # [[Window]] 
 The Window class is responsible for creating a OpenGL context window which allows for direct/indirect functionality of other components within the engine such as the [[Sprite Renderer]]. 
 
-Not only does this class provide a OpenGL context window it also provides a runtime function that keeps the context window open, provide (explain the pattern of the functions in Window like init, update, stepupdate, and render)
+Not only does this class provide a OpenGL context window it also provides a runtime function that keeps the context window open, provide runtime functions like the "update()" and "Render()"
 
-Furthermore, this class is intended and meant to be inherited because the functionality it provides needs to be arbitrarily defined. 
+Furthermore, this class is intended and meant to be inherited because the functionality it provides needs to be arbitrarily defined, however there are some functions that can be optionally overridden to change their functionality to fulfill some purpose or need. 
 
 For example, when defining a what happens every frame we need to override "Update()" that is in the [[Window]] class and give it a definition
 ```cpp
@@ -356,7 +354,20 @@ void ExampleWindow::Update(){
 }
 ```
 
+The following classes that NEED to be overridden:
+* Init()
+* Update()
+* StepUpdate()
+* Input()
+* Render()
 # [[Cameras]] 
-(Explain the that changing how projectionview is calculated is optional)
+The Camera class allows for keeping track and provide calculation of projection and within this class it is optional to override the how the projection is calculated which is called "calculateProjectionView()"
 
-After examining and going over each of the module of the engine, you should be ready to start
+Upon reaching at this point, you should understand what the engine contains and how its ecosystem works. Now you can move onto understanding how each module operates, the list below will be listed in order of importance before heading into [[Usage]] which there we make a simple game utilizing most the modules of the engine: 
+* [[Window]]
+* [[Resource Systems]]
+* [[ECS]]
+* [[Cameras]]
+* [[Engine]]
+* [[Input]]
+* [[Sound]]
