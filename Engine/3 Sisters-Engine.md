@@ -269,6 +269,9 @@ void func(){
 	
 	// register system
 	ECS_2DRenderer renderer = ECS::RegisterSystem<ECS_2DRenderer>();
+	
+	// use register system
+	renderer.render(ts);
 }
 ```
 
