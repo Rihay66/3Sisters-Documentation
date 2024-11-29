@@ -1,14 +1,22 @@
 The Window-GLFW class is responsible for creating a OpenGL context window utilizing the GLFW library which allows for direct/indirect functionality of other components within the engine such as the [[Sprite Renderer]]. 
 
-Refer to GLFW documentation: https://www.glfw.org/docs/latest/ 
+Refer to GLFW documentation: 
+	https://www.glfw.org/docs/latest/ 
+Refer to OpenGL documentation: 
+	https://www.opengl.org/Documentation/Documentation.html 
 
 Class Functions: (Function and usage example)
+
+Header location
+```cpp
+#include <window/glfw_window.hpp>
+```
 #### protected: setTargetTimeStep(double)
 - used to set the target frame time between frame, aka max frame time
 - the default value for time step is 16.6ms or 60 frames per second
 ```cpp
-// in order to utilize func must use inheritance
-void func::Window(){
+// in order to utilize function must use inheritance
+void AppWindow::func(){
 	// set target time step to 60 frames per second
 	setTargetTimeStep(1.0f/60.0f);	
 }
@@ -17,16 +25,44 @@ void func::Window(){
 * used to set the fixed frame time between frame
 *  the default value for fixed time step is 16.6ms or 60 frames per second
 ```cpp
-// in order to utilize func must use inheritance
-void func::Window(){
+// in order to utilize function must use inheritance
+void AppWindow::func(){
 	// set target time step to 60 frames per second
 	setFixedTimeStep(1.0f/60.0f);	
+}
+```
+#### protected virtual: additionalWindowOptions()
+* used for adding additional GLFW window hints
+* this function gets called by initializeWindow()
+```cpp
+// in order to utilize function must use inheritance
+void AppWindow::additionalWindowOptions(){
+	// add additional window options
+	// refer to GLFW documentation
+	
+	// example: upon window creation, maximize the window
+	glfwWindowHint(GLFW_MAXIMIZED, GLFW_TRUE);
+}
+```
+#### protected virtual: setUpOpenGL()
+* used for setting up OpenGL rendering
+* by default it is defined to allow for 2D rendering
+```cpp
+// in order to utilize function must use inheritance
+void AppWindow::setUpOpenGL(){
+	// set opengl rendering
+	// refer to OpenGL documentation
+	
+	// example: set up rendering for 2D
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
 ```
 #### public virtual: initializeWindow(int, int, const char*)
  * used to initialize the window and it's contexts by default initializes GLFW and creates a Window with OpenGL 4.5 capabilities
  * sets the window handle context which can be retrieved
  * the last parameter, const char*, gives the window a name which is optional
+ * during initialization it calls additionalWindowOptions() and setUpOpenGL()
  * Overwriting is not recommended, however due note that runtime(), getDeltaTime(), setUpOpenGL() require GLFW to be initialized and have a created window handle context
 ```cpp 
 void func(){
@@ -89,5 +125,60 @@ void func(){
 void func(){
 	// obtain the height of the window
 	unsigned int w = window.getHeight();
+}
+```
+#### public virtual: init()
+* used to call functions that handle the loading of shaders, textures, and objects
+* must at least be called once
+```cpp
+// in order to utilize function must use inheritance
+void AppWindow::init(){
+	// example: initialize a player object
+	player.init();
+}
+```
+#### public virtual: stepUpdate(double)
+* used to update Physics, ticks systems, or other at a fixed time step
+* the parameter of double is the calculate fixed time step value
+```cpp
+// in order to utilize function must use inheritance
+void AppWindow::stepUpdate(double ts){
+	// example: make a position vector move left over time
+	position.x += 5.0f * ts
+}
+```
+#### public virtual: update()
+* used to update logic, custom events, and other at the target time step
+```cpp
+// in order to utilize function must use inheritance
+void AppWindow::update(){
+	// example: check a list of player of which one is not alive
+	for(auto& plr: players){
+		if(plr.isAlive == false){
+			//do something...
+		}
+	}
+}
+```
+#### public virtual: render(double)
+* used to render things on the screen
+* the parameter is used for linear interpolation to render things smoothly no matter the target time step
+```cpp
+#include <engine/sprite_renderer.hpp>
+
+// in order to utilize function must use inheritance
+void AppWindow::render(double alpha){
+	// example: flush all acumulated quads
+	SpriteRenderer::FlushQuads();
+}
+```
+#### public virtual: runtime()
+* calls Init() once, then loops through getDeltaTime(), update(), stepUpdate(), and render()
+* in addition it calls calls GLFW poll events, swap buffers and clears the OpenGL color buffer
+* if overwritten, may need to apply calculations of time step, fixed time step and accumulator yourself
+```cpp
+void func(){
+	// call runtime
+	window.runtime();
 }
 ```
