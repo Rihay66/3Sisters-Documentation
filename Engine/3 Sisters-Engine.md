@@ -2,7 +2,7 @@ To understand the engine let's understand how it contains and operates:
 # Static-Singletons
 Resource/Functional modules of the engine are Static Singletons Classes where their resources are stored statically and automatically freed without any explicit function call.
 
-To include a Static Singleton module in a source or header file can be done simply by including their header. Doing multiple includes makes no difference as long as their included.
+To include a Static Singleton module in a source or header file can be done simply by including their header. Doing multiple includes makes no difference as long as they're included.
 
 For example: including a Static Singleton module like [[Resource Manager]]
 
@@ -268,10 +268,7 @@ void func(){
 	// initialize ECS
 	
 	// register system
-	ECS_2DRenderer renderer = ECS::RegisterSystem<ECS_2DRenderer>();
-	
-	// use register system
-	renderer.render(ts);
+	ECS_SpriteRendererPtr renderer = ECS::RegisterSystem<ECS_SpriteRenderer>();
 }
 ```
 
@@ -308,7 +305,10 @@ void func() {
 	sig.set(ECS::GetComponentType<ComponentExample>());
 	sig.set(ECS::GetComponentType<TestComponent>());
 	// set the system's signatures
-	ECS::SetSystemSignature<ECS_2DRenderer>(sig);
+	ECS::SetSystemSignature<ECS_SpriteRenderer>(sig);
+
+	// use system
+	renderer.render(ts);
 }
 ```
 
@@ -336,9 +336,12 @@ void func() {
 	// register system
 	
 	// set the system's signatures
-	ECS::SetSystemSignature<ECS_2DRenderer>(
+	ECS::SetSystemSignature<ECS_SpriteRenderer>(
 		ECS::GetComponentType<ComponentExample>(), 
 		ECS::GetComponentType<TestComponent>());
+	
+	// use system
+	renderer.render(ts);
 }
 ```
 # Inheritance and Virtual Functions

@@ -5,12 +5,15 @@ Refer to GLFW documentation:
 Refer to OpenGL documentation: 
 	https://www.opengl.org/Documentation/Documentation.html 
 
-Class Functions: (Function and usage example)
-
-Header location
+Header location/class name
 ```cpp
 #include <window/glfw_window.hpp>
+
+class Window{
+...
+};
 ```
+## Class Functions:
 #### protected: setTargetTimeStep(double)
 - used to set the target frame time between frame, aka max frame time
 - the default value for time step is 16.6ms or 60 frames per second

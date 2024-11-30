@@ -14,13 +14,40 @@ The functions and variables that are common between them
 	* this variable editable variable refers to the camera's position
 	* depending on the type of camera it's either a glm::vec2 or glm::vec3
 	refer to GLM documentation: http://glm.g-truc.net/0.9.9/api/modules.html
-* **calculateProjectionView([[shader]])
+* **calculateProjectionView([[Shader]])
 	* does calculations of the view and projection to create the ProjectionView and set to given shader
 	* in the calculation it includes the position of the camera
+	* can be overwritten using inheritance
 
 ## How to use the camera
+When going through a camera's "initialization" it also sets the world position where any created transform originates from which by default is the bottom left corner of the screen (can be changed by overwriting the calculateProjectionView()).
 
-stationary camera
+Also note that when changing the position or rotation of the camera, you must  call calculateProjectionView() again in order for the change to take effect onto the shader so thus the change takes affect on the screen.
+
+Initialization of a camera
+```cpp
+void func(){
+	// load a shader...
+	
+	// create a camera object
+	// example: using Orthographic camera
+	OrthoCamera camera;
+	
+	// no change given to camera position
+	
+	// set dimensions on the camera
+	camera.setDimensions(1280, 720);
+	
+	// calculate the projection view once
+	camera.calculateProjectionView(shader);
+	
+	// do something to the camera...
+}
+
+```
+Types of Camera examples
+
+Stationary camera
 ```cpp
 void func(){
 	// load a shader...
@@ -37,7 +64,7 @@ void func(){
 }
 ```
 
-moving camera
+Moving camera
 ```cpp
 void func(){
 	// load a shader...
@@ -60,5 +87,10 @@ void func(){
 }
 ```
 
+Here are the different types of cameras that handle what type of projection that is needed. 
 
+For 2D projection:
 [[Orthographic Camera]]
+
+For 3D/2D projection:
+*Coming soon*
