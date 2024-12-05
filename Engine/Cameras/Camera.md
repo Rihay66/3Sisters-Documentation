@@ -1,4 +1,4 @@
-The Camera classes are responsible for calculating projection onto the screen. 
+The Camera modules are responsible for calculating projection onto the screen. 
 These classes are objects and they keep track of their own position in world space.
 
 Before using this class YOU MUST have a loaded shader and in that shader it must have the following variable called:

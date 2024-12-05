@@ -2,9 +2,9 @@ To understand the engine let's understand how it contains and operates:
 # Static-Singletons
 Resource/Functional modules of the engine are Static Singletons Classes where their resources are stored statically and automatically freed without any explicit function call.
 
-To include a Static Singleton module in a source or header file can be done simply by including their header. Doing multiple includes makes no difference as long as they're included.
+To include a Static Singleton Class in a source or header file can be done simply by including their header. Doing multiple includes makes no difference as long as they're included.
 
-For example: including a Static Singleton module like [[Resource Manager]]
+For example: including a Static Singleton Class like [[Resource Manager]]
 
 ``` cpp
 #include <ResourceSystems/Managers/ResourceManager.hpp>
@@ -12,7 +12,7 @@ For example: including a Static Singleton module like [[Resource Manager]]
 
 From this point the class [[Resource Manager]] calls its private constructor which only initializes as static object with its private static variables.
 
-In C++ to use a function of a Static Singleton class can be done as follow:
+In C++ to use a function of a Static Singleton Class can be done as follow:
 
 ```cpp
 #include <resourcesystems/managers/resource_manager.hpp>
@@ -31,7 +31,7 @@ For example: [[Sprite Renderer]] requires a loaded [[Shader]] and optionally a s
 #include <engine/sprite_renderer.hpp>
 
 void func(){
-	//... load a shader
+	// load a shader
 	
 	// initialize sprite renderer with a shader and a custom 2D sprite size 
 	SpriteRenderer::Init(shader, {15.0f, 60.0f});
@@ -84,6 +84,8 @@ To create an Entity in code it would look like so
 #include <ecs/ecs.hpp>
 
 void func(){
+	// initialize ECS
+	
 	// create an entity
 	ECS::CreateEntity();
 }
@@ -366,14 +368,14 @@ The following classes that NEED to be overridden:
 * StepUpdate()
 * Input()
 * Render()
-# [[Cameras]] 
+# [[Camera]] 
 The Camera class allows for keeping track and provide calculation of projection and within this class it is optional to override the how the projection is calculated which is called "calculateProjectionView()"
 
 Upon reaching at this point, you should understand what the engine contains and how its ecosystem works. Now you can move onto understanding how each module operates, the list below will be listed in order of importance before heading into [[Usage]] which there we make a simple game utilizing most the modules of the engine: 
 * [[Window]]
 * [[Resource Systems]]
 * [[ECS]]
-* [[Cameras]]
+* [[Camera]]
 * [[Engine]]
 * [[Input]]
 * [[Sound]]

@@ -17,13 +17,13 @@ class App : public Window{
 		App();
 };
 ```
-Inside the class there are functions that are required to be overridden which then allows for specifying your own code to make the app do something and those classes are:
+Inside the class there are functions that are required to be overridden which then allows for specifying your own code to make the app do something and those functions or paradigm pattern is:
 * **init()
 * **stepUpdate(double)
 * **update()
 * **render(double)
 
-\*these functions are the same for both GLFW and SDL versions of window*
+\*these functions or paradigm are the same for both GLFW and SDL versions of window*
 
 So it should look like this:
 
@@ -57,7 +57,7 @@ App::App() : Window(){
 // define window functions
 
 void App::init(){
-	// start
+	// initialze resources, players, or systems
 }
 
 void App::stepUpdate(double ts){
