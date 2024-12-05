@@ -60,7 +60,10 @@ void render(double alpha){
 
 ```
 
-Here are all the Engine modules that handle a specific 
-[[Physics]] 
-[[Sprite Renderer]]
-[[Text Renderer]]
+Here are all the Engine modules that handle a specific functionality:
+[[Physics]] - for handling 2D physics
+[[Sprite Renderer]] - for handling quad, line, rectangle rendering
+[[Text Renderer]] - for handling text rendering
+
+Here are all the Engine components/types:
+[[Interpolation]]

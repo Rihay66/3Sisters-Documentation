@@ -1,0 +1,1 @@
+Linear interpolation or named interpolation for short. In the engine it is used to smooth out rendered objects, like quads, being translated around the screen. 

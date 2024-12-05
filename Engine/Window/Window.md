@@ -7,7 +7,10 @@ For example App class inherits from Window
 // app.hpp
 // recommend to place classes in headers and define functions in source
 
-// both GLFW and SDL versions the Window class is named the same way
+// since both GLFW and SDL versions the Window class is named the same way
+// to differentiate this namespace usage is required
+// example: use the GLFW window version module 
+using namespace GLFW;
 
 class App : public Window{
 	private:

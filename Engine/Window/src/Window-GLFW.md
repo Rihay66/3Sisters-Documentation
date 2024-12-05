@@ -5,13 +5,15 @@ Refer to GLFW documentation:
 Refer to OpenGL documentation: 
 	https://www.opengl.org/Documentation/Documentation.html 
 
-Header location/class name
+Header location/namespace/class name
 ```cpp
 #include <window/glfw_window.hpp>
 
+namespace GLFW{
 class Window{
 ...
 };
+}
 ```
 ## Class Functions:
 #### protected: setTargetTimeStep(double)
