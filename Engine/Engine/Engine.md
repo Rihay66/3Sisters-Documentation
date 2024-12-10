@@ -26,7 +26,7 @@ void func(){
 
 However, some of the Static Singleton Classes require more information to be fully used anywhere else so some may need to be used in sequence.
 
-For example: [[Sprite Renderer]] requires a loaded [[Shader]] and optionally a set universal sprite size for any rendered quad sprite (also indirectly the Shader's projectionView must be set utilizing the [[Camera]] module)
+For example: [[Sprite Renderer]] requires a loaded [[Shader]] and optionally a set universal sprite size for any rendered quad sprite (also indirectly the [[Shader]]'s projectionView must be set utilizing the [[Camera]] module)
 ``` cpp
 #include <engine/sprite_renderer.hpp>
 

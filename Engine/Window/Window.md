@@ -77,9 +77,9 @@ void App::render(double ts){
 ```
 
 Since the window class is the basis for engine, in order to start using it we need understand the following functions:
-* **initializeWindow(int, int, const char*)
+* ##### initializeWindow(int, int, const char*)
 	* This function initializes the window and OpenGL capabilities. For parameters the function requires width and height of the window being created. Optionally you can give the window a name.
-* **runtime()
+* ##### runtime()
 	- This function first calls the function init() and then updates the following functions in a infinite loop until given a close window call
 		* init()
 		* stepUpdate(double)

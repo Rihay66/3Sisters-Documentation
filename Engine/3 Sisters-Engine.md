@@ -347,7 +347,7 @@ void func() {
 }
 ```
 # Inheritance and Virtual Functions
-The following modules are the classes that either optional or need to be inherited and its functions overwritten to allow for some functionality.
+The following example modules are the classes that either optional or need to be inherited and its functions overwritten to allow for some or further functionality.
 # [[Window]] 
 The Window class is responsible for creating a OpenGL context window which allows for direct/indirect functionality of other components within the engine such as the [[Sprite Renderer]]. 
 
@@ -370,6 +370,41 @@ The following classes that NEED to be overridden:
 * Render()
 # [[Camera]] 
 The Camera class allows for keeping track and provide calculation of projection and within this class it is optional to override the how the projection is calculated which is called "calculateProjectionView()"
+
+# Namespaces
+Within the Engine there is support for two different libraries that support windowing and input which are:
+* GLFW
+* SDL
+To allow for almost seamless transition between switching the libraries they have their own unique namespace that pertains to them
+
+For example, defining a window class utilizing GLFW windowing
+```cpp
+// take note of the included header
+#include <window/glfw_window.hpp>
+
+// use the GLFW namespace
+using namespace GLFW;
+
+class AppWindow : public Window{
+	// define the class...
+};
+```
+
+Now, for a reasonable reason you would like to switch to SDL, here how its done for this peculiar example
+```cpp
+// take note of the included header
+#include <window/sdl_window.hpp>
+
+// use the SDL namespace
+using namespace SDL;
+
+class AppWindow : public Window{
+	// define the class...
+};
+
+```
+
+However, you do need to look out for any differences between the two when it comes down to migrating from one to another as there can be some differences in missing feature or a function requires additional initializing variables. 
 
 Upon reaching at this point, you should understand what the engine contains and how its ecosystem works. Now you can move onto understanding how each module operates, the list below will be listed in order of importance before heading into [[Usage]] which there we make a simple game utilizing most the modules of the engine: 
 * [[Window]]
