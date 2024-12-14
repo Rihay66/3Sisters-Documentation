@@ -4,6 +4,7 @@ Refer to GLFW documentation:
 	https://www.glfw.org/docs/latest/ 
 Refer to OpenGL documentation: 
 	https://www.opengl.org/Documentation/Documentation.html 
+	https://www.khronos.org/opengl/wiki/Main_Page
 
 Header location/namespace/class name
 ```cpp
@@ -28,7 +29,7 @@ void AppWindow::func(){
 ```
 #### protected: setFixedTimeStep(double)
 * used to set the fixed frame time between frame
-*  the default value for fixed time step is 16.6ms or 60 frames per second
+* the default value for fixed time step is 16.6ms or 60 frames per second
 ```cpp
 // in order to utilize function must use inheritance
 void AppWindow::func(){
@@ -68,7 +69,7 @@ void AppWindow::setUpOpenGL(){
  * sets the window handle context which can be retrieved
  * the last parameter, const char*, gives the window a name which is optional
  * during initialization it calls additionalWindowOptions() and setUpOpenGL()
- * Overwriting is not recommended, however due note that runtime(), getDeltaTime(), setUpOpenGL() require GLFW to be initialized and have a created window handle context
+ * overwriting is not recommended, however due note that runtime(), getDeltaTime(), setUpOpenGL() require GLFW to be initialized and have a created window handle context
 ```cpp 
 void func(){
 	// create a class object that inherits from Window
@@ -89,7 +90,7 @@ void func(){
 ```
 #### public: getWindowHandle() -> returns glfwWindow*
 * used to grab reference to the window handle context
-* returns glfwWindow* created from initializeWindow(), else returns nullptr when not called
+* returns glfwWindow* created from initializeWindow(), else returns nullptr when initializeWindow() is never called
 ```cpp
 void func(){
 	// grab reference to the window handle
@@ -104,7 +105,7 @@ void func(){
 ```
 #### public virtual: getDeltaTime() -> returns float
 * returns the current delta time
-* Overwriting may need further modifications or accommodation to the update(), stepUpdate(), and render() as it may cause unintended behavior
+* overwriting may need further modifications or accommodation to the update(), stepUpdate(), and render() as it may cause unintended behavior
 ```cpp 
 void func(){
 	// obtain the deltatime
