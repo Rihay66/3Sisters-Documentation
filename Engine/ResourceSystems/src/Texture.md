@@ -5,12 +5,13 @@ Note that by default:
 * Wrapping mode on both S and T axis -> GL_REPEAT
 * Filter Max and Min -> GL_NEAREST 
 
-Due note that once generating a texture, you MUST DELETE it before program exit
+Due note that upon generating a texture, you MUST DELETE it before program exit to avoid memory leaks
 ```cpp
 int main(){
 	// get image data from file
-	// load a texture
+	// create texture object
 	Texture tex;
+	// generate texture from image data
 	tex.Generate(width, height, data);
 	
 	// Use the texture...

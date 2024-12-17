@@ -49,9 +49,7 @@ void func(){
 }
 ```
 
-Most managers that manage resources utilize this system of storing and retrieving stuff from just using a name and due note that name is explicit meaning that "Pet" != "pet"
-
-*In the future there will be more different types of Resource managers*
+Most managers that manage resources utilize this system of storing and retrieving stuff from just using a name and due note that name is explicit meaning that "Pet" != "pet".
 
 Here are all the Resource systems for quick reference:
 [[Texture]]

@@ -1,4 +1,4 @@
-To understand the engine let's understand how it contains and operates:
+To understand the engine let's understand how what it contains and how it operates:
 # Static-Singletons
 Resource/Functional modules of the engine are Static Singletons Classes where their resources are stored statically and automatically freed without any explicit function call.
 
@@ -203,7 +203,7 @@ void func(){
 	// attach component to entity
 	ECS::AddComponent(entity, ComponentExample{});
 	
-	// remove component to entity
+	// remove component from entity
 	ECS::RemoveComponent<ComponentExample>(entity);
 }
 ```
@@ -252,7 +252,7 @@ void func(){
 	// create an entity
 	// attach ComponentExample to entity
 	
-	// get component from entity and modify directly
+	// get component from entity and modify directly an attribute
 	ECS::GetComponent<ComponentExample>(entity).size -= 1.0f;
 } 
 ```
@@ -404,7 +404,7 @@ class AppWindow : public Window{
 
 ```
 
-However, you do need to look out for any differences between the two when it comes down to migrating from one to another as there can be some differences in missing feature or a function requires additional initializing variables. 
+However, you do need to look out for any differences between the two when it comes down to migrating from one to another as there can be some differences in missing feature or a function requires additional initializing variables or parameters. 
 
 Upon reaching at this point, you should understand what the engine contains and how its ecosystem works. Now you can move onto understanding how each module operates, the list below will be listed in order of importance before heading into [[Usage]] which there we make a simple game utilizing most the modules of the engine: 
 * [[Window]]

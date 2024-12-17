@@ -91,6 +91,3 @@ Here are the different types of cameras that handle what type of projection that
 
 For 2D projection:
 [[Orthographic Camera]]
-
-For 3D/2D projection:
-*Coming soon*
