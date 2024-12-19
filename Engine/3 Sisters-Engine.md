@@ -10,7 +10,7 @@ For example: including a Static Singleton Class like [[Resource Manager]]
 #include <ResourceSystems/Managers/ResourceManager.hpp>
 ```
 
-From this point the class [[Resource Manager]] calls its private constructor which only initializes as static object with its private static variables.
+From this point the class [[Resource Manager]] calls its private constructor which only initializes as a static object with its private static variables.
 
 In C++ to use a function of a Static Singleton Class can be done as follow:
 
