@@ -1,7 +1,9 @@
 The Camera classes are responsible for calculating an orthographic projection onto the screen to allow for 2D rendering. 
 
-Refer to [[Resource Systems]] on [[Shader]]s
-Refer to GLM documentation: http://glm.g-truc.net/0.9.9/api/modules.html
+Refer to [[Resource Systems]] 
+* [[Shader]]
+Refer to GLM documentation: 
+* http://glm.g-truc.net/0.9.9/api/modules.html
 
 Header location/class name:
 ```cpp

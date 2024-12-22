@@ -1,10 +1,10 @@
 The Window-GLFW class is responsible for creating a OpenGL context window utilizing the GLFW library which allows for direct/indirect functionality of other components within the engine such as the [[Sprite Renderer]]. 
 
 Refer to GLFW documentation: 
-	https://www.glfw.org/docs/latest/ 
+* https://www.glfw.org/docs/latest/ 
 Refer to OpenGL documentation: 
-	https://www.opengl.org/Documentation/Documentation.html 
-	https://www.khronos.org/opengl/wiki/Main_Page
+* https://www.opengl.org/Documentation/Documentation.html 
+* https://www.khronos.org/opengl/wiki/Main_Page
 
 Header location/namespace/class name
 ```cpp

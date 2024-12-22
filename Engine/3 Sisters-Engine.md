@@ -50,6 +50,8 @@ For quick reference, here are the Static Singleton Classes in the engine:
 * [[ECS]]
 * [[GLFW Gamepad]]
 * [[GLFW keyboard]]
+* [[SDL Gamepad]]
+* [[SDL keyboard]]
 # ECS
 The Entity Component System ([[ECS]]) is a different approach to representing objects or "GameObjects" and using them to keep track and allow for some functionality. Despite its performance benefits, though its design and usage requires a lot more thinking and even getting used to if you've been used to OOP. This general information should give enough information to start thinking about and not only that there will be examples and tutorials showing its usage and application.
 
@@ -372,10 +374,10 @@ The following classes that NEED to be overridden:
 The Camera class allows for keeping track and provide calculation of projection and within this class it is optional to override the how the projection is calculated which is called "calculateProjectionView()"
 
 # Namespaces
-Within the Engine there is support for two different libraries that support windowing and input which are:
+Within the Engine there is support for two different libraries that are for windowing and input which are:
 * GLFW
 * SDL
-To allow for almost seamless transition between switching the libraries they have their own unique namespace that pertains to them
+To allow for almost seamless transition between switching these libraries engine has its own unique namespace that pertains to them
 
 For example, defining a window class utilizing GLFW windowing
 ```cpp

@@ -51,6 +51,41 @@ void func(){
 
 Most managers that manage resources utilize this system of storing and retrieving stuff from just using a name and due note that name is explicit meaning that "Pet" != "pet".
 
+When compiling your application into an executable program and upon opening you are given an error that the program can't find a file, as an example we'll use a texture file called "cat.png", and the program gives an error. 
+
+This is because the program wasn't either given a path to the file and/or the file is not within reach of the executable. To properly set this up or fix the issue follow the following:
+
+In the directory of where the application was compiled to should look likes this:
+```
+/build
+	/shaders	  
+	/textures
+		cat.png
+	myapp.exe
+````
+In the example above, the executable is within a "build" folder and along side with two other folders "shaders" and "textures". Within the "textures" folder is the texture the program is trying to load is called "cat.png".
+
+In the code of the program the line that's giving the error
+```cpp
+ResouceManager::LoadTexture("cat.png","cat");
+```
+
+#### There are two ways to fix this:
+##### Move the file "cat.png" outside of the "textures" folder and next to the executable so the build folder so it should look like this
+	/build
+		/shaders
+		/textures
+		cat.png
+		myapp.exe
+Now the program now properly executes, but by organization of the files can get messy and likely to cause a headache in finding what files is missing when the program gets larger.
+
+##### Change the line of code that loads the texture to be given a path, so the code would look likes this
+```cpp	
+ResourceManager::LoadTexture("textures/cat.png", "cat");
+```
+	
+Now the code properly executes and the organization of the files is much better as the program gets larger we can separate what files are "textures", "shaders", "sound files", or etc.
+
 Here are all the Resource systems for quick reference:
 [[Texture]]
 [[Shader]]

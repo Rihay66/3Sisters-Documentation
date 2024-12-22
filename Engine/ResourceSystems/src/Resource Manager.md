@@ -1,5 +1,11 @@
 The Resource Manager is responsible for handling and managing either loading or retrieving [[Shader]]s, [[Texture]]s, SubTextures, and Fonts from a given file location. It provides the loaded resources to be available across the runtime of the application, hence this class is a Static Singleton Class. In order for this class to function it needs OpenGL to be initialized before utilizing this class.
 
+Refer to OpenGL documentation: 
+* https://www.opengl.org/Documentation/Documentation.html 
+* https://www.khronos.org/opengl/wiki/Main_Page
+Refer to GLSL documentation:
+* https://www.khronos.org/opengl/wiki/Core_Language_(GLSL)
+
 To include a Static Singleton Class in a source or header file can be done simply by including their header. Doing multiple includes makes no difference as long as they're included.
 
 For example: including a Static Singleton Class like [[Resource Manager]]
@@ -58,8 +64,8 @@ void init(){
 
 // function used at some point in program
 void func(){
-	// get loaded texture
-	Texture tex& = ResourceManager::GetTexture("example");
+	// get reference of loaded texture
+	Texture& tex = ResourceManager::GetTexture("example");
 }
 ```
 
@@ -109,6 +115,43 @@ void func(){
 }
 ```
 
-(Explain how to use the file path)
+Header location/namespace/class name
+```cpp
+#include <ResourceSystems/Managers/ResourceManager.hpp>
 
-(Define Class functions, and header location and the example of function usage)
+class ResourceManager{
+...
+};
+```
+## Class Functions:
+#### static public: LoadShader(const char*, const char*, const char* , std::string) -> returns [[Shader]]&
+* loads (and generates) a shader program from file along with a name, loads the files in this order of vertex, fragment (and geometry) and extracts the shader's source code
+* returns a reference of the loaded/generated shader for external use
+* it is optional to load a geometry shader file, if there is no geometry shader then set as nullptr
+```cpp
+void func(){
+	// load a shader
+	ResourceManager::LoadShader("quad.vs","quad.frag", nullptr, "shader");
+}
+```
+#### static public: LoadTexture(const char*, std::string, bool) -> [[Texture]]&
+* loads (and generates) a texture from file along with a name and optional texture filter option
+* returns a reference of the loaded/generated textyre for external use
+* automatically the given file extension that is given, the function determines if it uses alpha or not
+* by default the texture's filter is set to be nearest and it is optional to set it to true which sets to be linear
+```cpp
+void func(){
+	// load a texture
+	ResourceManager::LoadTexture("textures/example.png", "example");
+}
+```
+#### static public: LoadFontTexture(const char*, unsigned int, std::string, bool) -> std::map<char, Character>&
+* loads (and generates) a font from file with a font size along with a name and optional texture filter option
+* returns a reference of the map of font characters that are attached to a character for external use
+* by default the texture's filter is set to be nearest and it is optional to set it to true which sets to be linear
+```cpp
+void func(){
+	// load a font texture
+	ResourceManager::LoadFontTexture("fonts/arial.ttf",12,"font");
+}
+```

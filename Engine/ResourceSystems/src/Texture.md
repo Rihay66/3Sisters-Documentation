@@ -25,8 +25,8 @@ int main(){
 ```
 
 Refer to OpenGL documentation: 
-	https://www.opengl.org/Documentation/Documentation.html 
-	https://www.khronos.org/opengl/wiki/Main_Page
+* https://www.opengl.org/Documentation/Documentation.html 
+* https://www.khronos.org/opengl/wiki/Main_Page
 
 Header location/class name
 ```cpp
