@@ -155,3 +155,92 @@ void func(){
 	ResourceManager::LoadFontTexture("fonts/arial.ttf",12,"font");
 }
 ```
+#### static public: GenerateSubTexture(std::string, [[Texture]]&, glm::uvec2, glm::uvec2, glm::uvec2) -> returns std::array<glm::vec2, 4>&
+* use a loaded texture to create a sub texture along with a name
+* you must know the dimensions of the texture
+* use the coordinates that start from the bottom left of the texture, the cell size or the portion taken from the coordinate, and by default per pixel is set to 1 which optional can be changed
+```cpp
+void func(){
+	// load a texture
+	// create a subtexture
+	ResourceManager::GenerateSubTexture("bench", benchesTexture, {0.0f, 5.0f}, 20.0f, 20.0f);
+}
+```
+#### static public: GenerateWhiteTexture()
+* create a white texture that is named "default"
+* this is useful for debugging, placeholder, and/or useful texture without having to create a similar texture by hand.
+* when called again does nothing
+```cpp
+void func(){
+	// generate white texture
+	ResourceManager::GenerateWhiteTexture();
+	// get the generated texture
+	Texture& tex = ResourceManager::GetTexture("default");
+}
+```
+#### static public: GetShader(std::string) -> [[Shader]]&
+* used to retrieve a stored shader
+```cpp
+void func(){
+	// load a shader
+	// get the shader
+	Shader& shader = ResourceManager::GetShader("quad");
+}
+```
+#### static public: GetTextureIndex(std::string) -> int
+* retrieves the texture index from a stored texture
+* the index of textures are binded through ResourceManager's BindTexture()
+* useful to [[Sprite Renderer]]
+```cpp
+void func(){
+	// load texture
+	// get the texture index from stored texture
+	int texIndex = ResourceManager::GetTextureIndex("default");
+	
+	// example: use the texture index to render a quad with the loaded texture
+	// ...
+	SpriteRenderer::DrawQuad(texIndex, position, size, rotation, color);
+	// ...
+}
+```
+#### static public: GetTexture(std::string) -> returns [[Texture]]&
+* used to retrieve a stored texture
+```cpp
+void func(){
+	// load a texture
+	// get the loaded texture
+	Texture& tex = ResourceManager::GetTexture("default");
+}
+```
+#### static public: GetFontTexture(std::string) -> returns std::map<char, Character>&
+* used to retrieve a stored font texture map that contains characters and associated font character
+```cpp
+void func(){
+	// load a font
+	// get the font texture
+	std::map<char, Character>& font = ResourceManager::GetFontTexture("font");
+}
+```
+#### static public: GetSubTexture(std::string) -> std::array<glm::vec2, 4>&
+* used to retrieve a generated sub texture
+```cpp
+void func(){
+	// load a texture
+	Texture& tex = ResourceManager::LoadTexture("animals.png","animals");
+	// generate a sub texture from the loaded texture
+	ResourceManager::GenerateSubTexture("animals", tex, {2.0f, 0.0f}, {5.0f,5.0f});
+	// get the sub texture
+	std::array<glm::vec2, 4>& texCoords = ResourceManager::GetSubTexture("cat");
+}
+```
+#### static public: BindTextures()
+* used to bind all texture (not fonts) from the texture list to be used by OpenGL so then it can be used by a renderer like [[Sprite Renderer]]
+* is automatically called by LoadTexture()
+* can be called multiple times
+```cpp
+void func(){
+	// load a texture
+	// bind all loaded textures, note that LoadTexture already calls this func
+	ResourceManager::BindTextures();
+}
+```
