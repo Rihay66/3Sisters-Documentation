@@ -92,7 +92,36 @@ Because of the fragments variable that the Sprite Renderer interacts with
 // Fragment
 uniform sampler2D image[32];
 ```
-(Talk about when it comes to textures)
+It requires textures that are loaded to be bounded to an index from 0-31. The variable mentioned in the fragment shader must be initialized
+```cpp
+void func(){
+	// grab the uniform location of 'image' in the shader, the name 'image' is explicit
+	auto loc = glGetUniformLocation(quadShader.getID(), "image");
+
+	// set up array to the size of the max number of textures
+	int samplers[maxTextureSlots];
+	
+	// set up samplers array
+	for (int i = 0; i < maxTextureSlots; i++){
+		samplers[i] = i;
+	}
+}
+```
+To bind each loaded texture to an index from 0-31, due note that the engine by default uses OpenGL 4.5 so here how it's done
+```cpp
+void func(){
+	// texIDList contains a list of unique ID from loaded textures
+
+	// bind all the textures from first to last
+	for(int i = 0; i < texIDList.size(); i++){
+		// call to bind texture by their ID to an index
+		glBindTextureUnit(i, texIDList[i]);
+	}
+}
+```
+Using a texture depending on how you organized your textures you should utilize the index and not the texture ID to apply a texture to whatever you are rendering.
+
+However, all of this texture binding is already done through [[Resource Manager]] so the explanation given above is only useful when making your own solution
 
 Header location/class name:
 ```cpp
