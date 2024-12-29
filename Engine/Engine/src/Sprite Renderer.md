@@ -1,12 +1,12 @@
 The Sprite Renderer is responsible for rendering Quads, and Lines given raw data. It provides multiples ways to render Quads, Lines, or Rectangles either by rendering each individually or all at the same time. In order for this class to function it needs OpenGL to be initialized before utilizing this class.
 
-The types of things that the Sprite Renderer can render which are Quads and Lines are considered and can be called "render primatives" and below are examples of what they looks like:
+The types of things that the Sprite Renderer can render which are Quads and Lines are considered and can be called "render primitives" and below are examples of what they looks like:
 
 Quad:
 ![[quad.png]]
 Line:
 ![[line.png]]
-(Additionally pre-built) Quad Wireframe:
+(Additionally) Quad Wireframe:
 ![[quadwire.png]]
 
 Refer to GLM documentation: 
@@ -38,7 +38,7 @@ void func(){
 }
 ```
 
-The Sprite Renderer does require a shader to be loaded and contain the following layout variables for the vertex [[Shader]] and fragment [[Shader]] (if it needs it) for each render primative:
+The Sprite Renderer does require a shader to be loaded and contain the following layout variables for the vertex [[Shader]] and fragment [[Shader]] (if it needs it) for each render primitive:
 
 Quad:
 ```glsl
@@ -47,7 +47,20 @@ layout (location = 0) in vec2 vertex;
 layout (location = 1) in vec2 texCoords; 
 layout (location = 2) in float texIndex;
 layout (location = 3) in vec4 color;
+
+out vec2 o_TexCoords;
+out float o_TexIndex;
+out vec4 o_spriteColor;
+
+uniform mat4 projectionView;
+
 // Fragment
+in vec2 o_TexCoords;
+in vec4 o_spriteColor;
+in float o_TexIndex;
+
+out vec4 color;
+
 uniform sampler2D image[32];
 ```
 Line:
@@ -55,9 +68,19 @@ Line:
 // Vertex
 layout (location = 0) in vec2 vertex; 
 layout (location = 1) in vec4 color;
+
+out vec4 o_lineColor;
+
+uniform mat4 projectionView;
+
+// Fragment
+in vec4 o_lineColor;
+
+out vec4 color;
+
 ```
 
-Before using the Sprite Renderer it needs to be initialized and given a shader so the class contains a "Init()", in the example below we'll use [[Resource Manager]] to load a shader and then initialize Sprite Renderer
+Before using the Sprite Renderer it needs to be initialized and given a shader so the class contains a "Init()", in the example below we'll use [[Resource Manager]] to load a shader and then initialize the Sprite Renderer
 ```cpp
 void func(){
 	// load the QUAD shader using Resource Manager
@@ -71,7 +94,7 @@ void func(){
 }
 ```
 
-Within the Sprite Renderer it is flexible on which render primative you want to use or want to enable later in your application
+Within the Sprite Renderer it is flexible on which render primitive you want to use or want to enable later in your application
 
 When it comes to rendering you MUST call certain function pertaining to both OpenGL and whichever [[Window]] library you pick like SDL or GLFW or custom
 ```cpp
@@ -85,7 +108,7 @@ void func(){
 	glfwSwapBuffers(windowHandle);	
 }
 ```
-Fortunately, the already build window classes, [[Window-GLFW]] and [[Window-SDL]], can already do this for you and they provide a paradigm which you can find in [[Window]] when you do all your rendering
+Fortunately, the already build window classes, [[Window-GLFW]] and [[Window-SDL]], can already do this for you and they provide a paradigm which you can find in [[Window]] where to do all your rendering
 
 Because of the fragments variable that the Sprite Renderer interacts with 
 ```glsl
@@ -133,7 +156,7 @@ class SpriteRenderer{
 ```
 ## Class Functions:
 #### static public: InitQuad([[Shader]]&, glm::uvec2)
-* used to initialize quad rendering and the pixel size of all quad objects
+* used to initialize quad rendering and the pixel size of all quad object
 * When calling this function again, it will give a warning that it has been already initialized
 ```cpp
 void func(){
