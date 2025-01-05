@@ -17,6 +17,8 @@ Refer to OpenGL documentation:
 Refer to GLSL documentation:
 * https://www.khronos.org/opengl/wiki/Core_Language_(GLSL)
 
+### Sprite Renderer is a Static Singleton Class
+
 To include a Static Singleton Class in a source or header file can be done simply by including their header. Doing multiple includes makes no difference as long as they're included
 
 For example: including a Static Singleton Class like [[Resource Manager]]
