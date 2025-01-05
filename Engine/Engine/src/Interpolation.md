@@ -1,4 +1,4 @@
-Linear interpolation or named interpolation for short. In the engine it is used to smooth out rendered [[Physics]] objects, being translated around the screen.  This can be very helpful for when the [[Physics]] runs at a lower frame rate than the renderer as without it it can cause the [[Physics]] objects to skip around
+Linear interpolation or named interpolation for short. In the engine it is used to smooth out rendered Physics objects, being translated around the screen.  This can be very helpful for when the a Physics engine runs at a lower frame rate than the renderer as without it it can cause the Physics objects to skip around
 
 Inspired from this resource:
 * https://gafferongames.com/post/fix_your_timestep/ 
@@ -55,7 +55,7 @@ struct Player{
 
 Then we'll utilize the [[Window]] paradigm to initialize our objects as the class does calculations that helps us use interpolation for every frame and passes the result into the parameter of render() which is called "alpha"
 
-Then we'll move the player to the right and update the interpolation within stepUpdate(), because stepUpdate always runs at the specified frame time by the variable called FixexTimeStep, further info can be found on [[Window]] as well [[Physics]] is update through here as well
+Then we'll move the player to the right and update the interpolation within stepUpdate(), because stepUpdate always runs at the specified frame time by the variable called FixexTimeStep, further info can be found on [[Window]]
 
 Finally, we calculate the interpolated position using interpolateState() which then can be used for rendering
 

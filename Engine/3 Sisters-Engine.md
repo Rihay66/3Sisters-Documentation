@@ -46,7 +46,6 @@ For quick reference, here are the Static Singleton Classes in the engine:
 * [[Sprite Renderer]]
 * [[Text Renderer]]
 * [[Sound Manager]]
-* [[Physics]]
 * [[ECS]]
 * [[GLFW Gamepad]]
 * [[GLFW keyboard]]
