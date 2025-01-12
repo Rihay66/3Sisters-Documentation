@@ -8,7 +8,7 @@ Refer to OpenGL documentation:
 
 Header location/namespace/class name
 ```cpp
-#include <window/glfw_window.hpp>
+#include <window/sisters_glfw_window.hpp>
 
 namespace GLFW{
 class Window{

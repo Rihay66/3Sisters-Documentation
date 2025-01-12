@@ -73,7 +73,7 @@ void func(){
 	unsigned int height = camera.getHeight();
 }
 ```
-#### public virtual: calculateProjectionView([[Shader]])
+#### public virtual: calculateProjectionView([[Shader]]&)
 * does calculations of the view and projection to create the ProjectionView and set to given shader
 * it allow for updating the [[Shader]]'s projectionView variable
 * can be overwritten 
@@ -86,4 +86,4 @@ void func(){
 	// calculate the projection view
 	camera.calculateProjectionView(shader);
 }
-```
+	```

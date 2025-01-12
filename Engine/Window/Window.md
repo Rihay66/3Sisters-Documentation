@@ -1,6 +1,6 @@
 The Window is responsible for creating a OpenGL context window which allows for direct/indirect functionality of other components within the engine such as the [[Sprite Renderer]]. 
 
-The Window class is an abstract class meaning YOU HAVE TO inherit this class which means creating a class that inherits from Window.
+The Window class is an abstract class meaning YOU HAVE TO inherit this class which means creating a class that inherits from Window in order to make use of it.
 
 For example App class inherits from Window
 ```cpp
