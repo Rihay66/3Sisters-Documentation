@@ -93,5 +93,4 @@ Here are all the Resource systems for quick reference:
 
 Other types of resource managers (these don't require OpenGL or a window context)
 [[Sound Manager]] - handles loading and retrieving sound
-[[Tag Manager]] - handles keep track of any arbitrary type 
 [[ECS]] - handles managing entities, components, and systems

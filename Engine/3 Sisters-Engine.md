@@ -42,7 +42,6 @@ Throughout the Documentation of this engine, each the module that are Static Sin
 
 For quick reference, here are the Static Singleton Classes in the engine:
 * [[Resource Manager]]
-* [[Tag Manager]]
 * [[Sprite Renderer]]
 * [[Text Renderer]]
 * [[Sound Manager]]
