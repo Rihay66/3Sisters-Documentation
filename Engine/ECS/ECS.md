@@ -72,10 +72,10 @@ Define components that will be attached to the Player:
 
 Since the Player will be moved around. We'll choose to move the player on a 2D space so the Player needs a component that contains the player's position:
 ```cpp
-// this can be it own header which will be called "playerComponent.hpp"
+// this can be it own header which will be called "player_component.hpp"
 
 // representation of the Player's position
-struct transform2D{
+struct Position{
 	float x; // x-axis position
 	float y; // y-axis position
 };
@@ -85,7 +85,7 @@ Now we then register the component to allow for usability of it within ECS
 ```cpp
 #include <ecs/ecs.hpp>
 // include the define component defined above
-#include "playerComponent.hpp"
+#include "player_component.hpp"
 
 
 void func(){
@@ -93,7 +93,7 @@ void func(){
 	ECS::Init();
 
 	// register components
-	ECS::RegisterComponent<transform2D>();
+	ECS::RegisterComponent<Position>();
 }
 ```
 
@@ -102,5 +102,38 @@ For moving the Player, we need to define a [[System]] which will automatically h
 So let's create such [[System]]. 
 
 ```cpp
-t
+// header file named "move_system.hpp"
+
+// include system to create our own
+#include <ecs/types/system.hpp
+
+// inherit from System to classify this to the ECS that this is a system
+// also gives access to "entities" list which are entities given by ECS that 
+// meet the required signature
+class MoveSystem : public System{
+	public:
+		// Move function
+		void Move();
+};
+
+// source file
+#include "move_system.hpp"
+// ECS to allow for grabbing components of entities
+#include <ecs/ecs.hpp>
+// defined component defined above
+#include "player_component.hpp"
+
+void MoveSystem::Move(){
+	// grab all entities with the set signature
+	for(auto const& entity : entities){
+		// grab reference of "Position" component from entity
+		auto& pos = ECS::GetComponent<Position>(entitiy);
+
+		// move the position on x
+		if(*insert input checking code here*){
+			pos.x += 1.0f;
+		}
+	}
+}
+
 ```

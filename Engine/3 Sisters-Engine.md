@@ -1,4 +1,28 @@
 To understand the engine let's understand how what it contains and how it operates:
+
+this is the include header file tree:
+```
+inc/
+	cameras/
+	ecs/
+		types/
+		systems/
+		managers/
+		components/
+	engine/
+		components/
+	glad/ <- Cross-platform OpenGL API
+	input/
+		managers/
+	resourceSystems/
+		managers/
+		types/
+	sound/
+		managers/
+	stb/ <- Image loading STB
+	window/
+```
+
 # Static-Singletons
 Resource/Functional modules of the engine are Static Singletons Classes where their resources are stored statically and automatically freed without any explicit function call.
 
