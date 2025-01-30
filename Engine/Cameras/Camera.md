@@ -38,7 +38,7 @@ void func(){
 	// set dimensions on the camera
 	camera.setDimensions(1280, 720);
 	
-	// calculate the projection view once
+	// calculate the projection view and apply to the shader once
 	camera.calculateProjectionView(shader);
 	
 	// do something to the camera...
@@ -59,7 +59,7 @@ void func(){
 	// set dimensions on the camera
 	camera.setDimensions(1280, 720);
 	
-	// calculate the projection view once
+	// calculate the projection view and apply to the shader once
 	camera.calculateProjectionView(shader);
 }
 ```

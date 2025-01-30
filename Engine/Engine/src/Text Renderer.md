@@ -36,17 +36,21 @@ Text:
 ```glsl
 // Vertex
 layout (location = 0) in vec4 vertex;
+
 out vec2 o_TexCoords;
-uniform mat4 projection;
+
+uniform mat4 projectionView;
 
 // Fragment
 in vec2 o_TexCoords;
+
 out vec4 color;
+
 uniform vec4 textColor;
-uniform sampler2D text;
+layout (binding = 0) uniform sampler2D text;
 ```
 
-Before using the Text Renderer it needs to be initialized and given a shader so the class contains a "Init()", in the example below we'll use [[Resource Manager]] to load a shader and then initialize the Text Renderer
+Before using the Text Renderer it needs to be initialized and given a shader so the class contains a "Init()", in the example below we'll use [[Resource Manager]] to load a shader, use [[Camera]] to provide "projectionView" calculation and then initialize the Text Renderer
 ```cpp
 void func(){
 	// load the TEXT shader using Resource Manager
@@ -54,9 +58,14 @@ void func(){
 
 	// get the TEXT shader
 	Shader& text = ResouceManager::GetShader("text");
+		
+	// apply projection calculation to the Line Shader using Camera
+	Camera cam;
+	cam.setDimensions(1280, 720);
+	cam.calculateProjectionView(text);
 
 	// initialize Text Rendeder for Text rendering
-	TextRenderer::Init(1280, 720, text);
+	TextRenderer::Init(text);
 }
 ```
 
@@ -83,15 +92,16 @@ class TextRenderer{
 };
 ```
 ## Class Functions:
-#### static public: Init(unsigned int, unsigned int, [[Shader]]&)
-* used to initialize text rendering and projection of all text
+#### static public: Init([[Shader]]&)
+* used to initialize text rendering of all text
 * all text are positioned per pixel 
 * When calling this function again, it will give a warning that it has been already initialized
 ```cpp
 void func(){
 	// load TEXT shader
+	// calculate projection and apply to TEXT shader
 	// initialize Text Renderer for text rendering
-	TextRenderer::Init(1280, 720, textShader);
+	TextRenderer::Init(textShader);
 }
 ```
 #### static public: DrawText(std::map<char, Character>&, std::string, glm::vec2, glm::vec2, glm::vec4)
@@ -101,14 +111,15 @@ void func(){
 	* position
 	* size
 	* color <- all RGBA values set to 1
-* recommended to use a font loaded through from the [[ResourceManager]]
+* recommended to use a font loaded through from the [[Resource Manager]]
 ```cpp
 // using window paradigm
 void init(){
 	// load TEXT shader
+	// calculate projection and apply to TEXT shader
 	// load font
 	// initialize Text Renderer for text rendering
-	TextRenderer::Init(1280, 720, textShader);
+	TextRenderer::Init(textShader);
 }
 
 ...

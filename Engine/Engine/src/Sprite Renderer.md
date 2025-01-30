@@ -82,7 +82,7 @@ out vec4 color;
 
 ```
 
-Before using the Sprite Renderer it needs to be initialized and given a shader so the class contains a "Init()", in the example below we'll use [[Resource Manager]] to load a shader and then initialize the Sprite Renderer
+Before using the Sprite Renderer it needs to be initialized and given a shader so the class contains a "Init()", in the example below we'll use [[Resource Manager]] to load a shader, use [[Camera]] to provide "projectionView" calculation and then initialize the Sprite Renderer
 ```cpp
 void func(){
 	// load the QUAD shader using Resource Manager
@@ -90,6 +90,11 @@ void func(){
 
 	// get the QUAD shader
 	Shader& quad = ResouceManager::GetShader("quad");
+
+	// apply projection calculation to the Quad Shader using Camera
+	Camera cam;
+	cam.setDimensions(1280, 720);
+	cam.calculateProjectionView(quad);
 
 	// initialize Sprite Rendeder for Quad rendering
 	SpriteRenderer::InitQuad(quad, {10.0f, 10.0f});
@@ -163,6 +168,7 @@ class SpriteRenderer{
 ```cpp
 void func(){
 	// load QUAD shader
+	// calculate projection and apply to QUAD shader
 	// initialize Sprite Renderer for quad rendering
 	SpriteRenderer::InitQuad(quadShader, {10.0f, 10.0f});
 }
@@ -175,6 +181,7 @@ void func(){
 ```cpp
 void func(){
 	// load LINE shader
+	// calculate projection and apply to LINE shader
 	// initialize Sprite Renderer for line rendering
 	SpriteRenderer::InitLine(lineShader, {5.0f, 5.0f});
 }
@@ -187,6 +194,7 @@ void func(){
 ```cpp
 void func(){
 	// load QUAD and LINE shaders
+	// calculate projection and apply to QUAD and LINE shader
 	// initialize Sprite Renderer
 	SpriteRenderer::Init(quadShader, lineShader, {10.0f, 10.0f}, {5.0f, 5.0f});
 }
@@ -207,6 +215,7 @@ void func(){
 void init(){
 	// load a texture
 	// load QUAD shader
+	// calculate projection and apply to QUAD shader
 	// initialize quad rendering
 	SpriteRenderer::InitQuad(quadShader, {10.0f, 10.0f});
 }
@@ -235,6 +244,7 @@ void render(double alpha){
 void init(){
 	// load a texture
 	// load QUAD shader
+	// calculate projection and apply to QUAD shader
 	// initialize quad rendering
 	SpriteRenderer::InitQuad(quadShader, {10.0f, 10.0f});
 }
@@ -263,6 +273,7 @@ void render(double alpha){
 // using window paradigm
 void init(){
 	// load LINE shader
+	// calculate projection and apply to LINE shader
 	// initialize line rendering
 	SpriteRenderer::InitLine(lineShader, {10.0f, 10.0f});
 }
@@ -287,6 +298,7 @@ void render(double alpha){
 // using window paradigm
 void init(){
 	// load LINE shader
+	// calculate projection and apply to LINE shader
 	// initialize line rendering
 	SpriteRenderer::InitLine(lineShader, {10.0f, 10.0f});
 }
@@ -317,6 +329,7 @@ void render(double alpha){
 void init(){
 	// load a texture
 	// load QUAD shader
+	// calculate projection and apply to QUAD shader
 	// initialize quad rendering
 	SpriteRenderer::InitQuad(quadShader, {10.0f, 10.0f});
 }
@@ -356,6 +369,7 @@ void render(double alpha){
 void init(){
 	// load a texture
 	// load QUAD shader
+	// calculate projection and apply to QUAD shader
 	// initialize quad rendering
 	SpriteRenderer::InitQuad(quadShader, {10.0f, 10.0f});
 }
@@ -391,6 +405,7 @@ void render(double alpha){
 // using window paradigm
 void init(){
 	// load LINE shader
+	// calculate projection and apply to LINE shader
 	// initialize line rendering
 	SpriteRenderer::InitLine(lineShader, {10.0f, 10.0f});
 }
@@ -417,6 +432,7 @@ void render(double alpha){
 void init(){
 	// load a texture
 	// load QUAD shader
+	// calculate projection and apply to QUAD shader
 	// initialize quad rendering
 	SpriteRenderer::InitQuad(quadShader, {10.0f, 10.0f});
 }
@@ -441,6 +457,7 @@ void render(double alpha){
 void init(){
 	// load a texture
 	// load LINE shader
+	// calculate projection and apply to LINE shader
 	// initialize line rendering
 	SpriteRenderer::InitLine(lineShader, {10.0f, 10.0f});
 }

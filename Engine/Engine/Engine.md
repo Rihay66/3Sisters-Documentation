@@ -32,7 +32,7 @@ For example: [[Sprite Renderer]] requires a loaded [[Shader]] and optionally a s
 
 void func(){
 	//... load a shader
-	//... set up camera
+	//... set up camera and projection view
 	// initialize sprite renderer with a shader and a custom 2D sprite size 
 	SpriteRenderer::Init(shader, {15.0f, 60.0f});
 }
@@ -42,12 +42,12 @@ Then the [[Sprite Renderer]] is now able to render (Also note that to render you
 ```cpp
 #include <engine/sprite_renderer.hpp>
 
-//* utilize the Window paradigm 
+//* utilizing the Window paradigm 
 
 void init(){
 	// load a shader
 	// load a texture
-	// set up camera
+	// set up camera and projection view
 	// initialie sprite renderer with a shader and utilize default 2D sprite size
 }
 

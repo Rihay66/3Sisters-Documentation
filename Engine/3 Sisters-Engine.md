@@ -56,6 +56,7 @@ For example: [[Sprite Renderer]] requires a loaded [[Shader]] and optionally a s
 
 void func(){
 	// load a shader
+	// apply projection calculation to the shader
 	
 	// initialize sprite renderer with a shader and a custom 2D sprite size 
 	SpriteRenderer::Init(shader, {15.0f, 60.0f});
@@ -430,7 +431,7 @@ class AppWindow : public Window{
 
 However, you do need to look out for any differences between the two when it comes down to migrating from one to another as there can be some differences in missing feature or a function requires additional initializing variables or parameters. 
 
-Upon reaching at this point, you should understand what the engine contains and how its ecosystem works. Now you can move onto understanding how each module operates, the list below will be listed in order of importance before heading into [[Usage]] which there we make a simple game utilizing most the modules of the engine: 
+Upon reaching at this point, you should understand what the engine contains and how its ecosystem works. Now you can move onto understanding how each module operates, the list below will be listed in order of importance before heading into [[Usage]] which there we learn how to set up and make a simple game utilizing most the modules of the engine: 
 * [[Window]]
 * [[Resource Systems]]
 * [[ECS]]
