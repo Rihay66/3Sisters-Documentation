@@ -39,6 +39,8 @@ class ECS{
 };
 ```
 ## Class functions:
+Helpful definitions:
+'T' - refers to an arbitrary type
 #### public: Init(char)
 * used to initialized ECS to allow for usage for [[Component]] and [[System]]
 * by default, the char option 'd' is set to allow for checking and printing errors
@@ -65,6 +67,116 @@ void func(){
 }
 ```
 
+#### public: DestroyEntity([[Entity]])
+* used to destroy a given entity
+* it also removes all components attached to that entity
+* avoid storing important data or pointers in components that are then onto the entity as it will be lost and may cause a segfault when trying to access the pointer that was on the entity
+```cpp
+void func(){
+	// initialize ECS
+	// create an entity
+	// optional: add component to entity=
 
+	// destroy entity
+	ECS::DestroyEntity(entity);
+}
+```
+
+#### public: RegisterComponent<'T'>()
+* used to register a specified component for [[Entity]] and [[System]] usage
+* due note that without registering a component, you can't add such component to an entity or create signatures for systems
+```cpp
+// define a component
+// EX: test component called 'Position' contains a float variables
+struct Position{
+	float x, y;
+};
+
+void func(){
+	// initialize ECS
+	
+	// register component
+	ECS::RegisterComponent<Position>();
+	
+	// add component to an entity or create signature for system...
+}
+```
+
+#### public: AddComponent([[Entity]], 'T')
+* used to add a specified component to an existing entity
+* due note that the specified component must be registered beforehand in order for it work
+* When adding components to an entity, you can add multiple components at the same time and you can initialize the values of the components all within the same line of code
+```cpp
+// define components
+// EX: the following components are used as example
+struct Position{
+	float x, y;
+};
+
+struct Texture{
+	int ID;
+};
+
+void func(){
+	// initialize ECS
+	// register component 'Position'
+	// create entity
+
+	// add component to entity
+	ECS::AddComponent(entity, Position{});
+}
+
+// *Alternative*
+void func(){
+	// initialize ECS
+	// register component 'Position'
+	// create entity
+
+	// add component to entity, and initalize values
+	ECS::AddComponent(entity, Position{
+		.x = 10,
+		.y = 20
+	});
+}
+
+// *Alternative*
+void func(){
+	// initialize ECS
+	// register components
+	// create entity
+
+	// add multiple component to entity, and initalize values
+	ECS::AddComponent(entity, 
+	Position{
+		.x = 10,
+		.y = 20
+	}, 
+	Texture{
+		.ID = 3
+	});
+}
+```
+
+#### public: RemoveComponent<'T'>(Entity)
+* used to remove a component from an existing entity
+* if the component is not registered then it will return an error
+```cpp
+// define components
+// EX: the following components are used as example
+struct Position{
+	float x, y;
+};
+
+void func(){
+	// initialize ECS
+	// register component
+	// create entity
+	// add component to entity
+
+	// remove component from entity
+	ECS::RemoveComponent<Position>(entity);
+}
+
+```
 
 Once finished reading all that make up the ECS system, you can then move onto learning how to use it all so refer to [[ECS Usage]] to get a better understanding on how to use ECS

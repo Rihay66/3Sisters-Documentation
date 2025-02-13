@@ -64,6 +64,8 @@ void init(){
 	ResourceManager::LoadTexture("textures/example.png", "example");
 }
 
+...
+
 // function used at some point in program
 void func(){
 	// get reference of loaded texture
