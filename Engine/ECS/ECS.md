@@ -274,7 +274,7 @@ void func(){
 
 #### public: GetSystem<'T'>() -> returns std::shared_ptr<'T'>
 * used to get reference of a registered [[System]]
-* returns nullptr if the system hasn't been registered
+* returns nullptr if the [[System]] hasn't been registered
 ```cpp
 // define system
 class MoveSystem : public System{

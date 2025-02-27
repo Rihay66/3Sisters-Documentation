@@ -38,7 +38,6 @@ Now we then register the component to allow for usability of it within ECS
 // include the define component defined above
 #include "player_component.hpp"
 
-
 void func(){
 	// initialize ECS for app usage
 	ECS::Init();
@@ -48,7 +47,7 @@ void func(){
 }
 ```
 
-For moving the Player, we need to define a [[System]] which will automatically handle grabbing the player, check the component that is attached to the Player, then update the player transform, and then loop again.
+For moving the Player, we need to define a [[System]] where the [[ECS]] which will automatically handle grabbing the player, then the [[System]] we defined can get the component that is attached to the Player, then update the player transform. We can also define *alias* that refers to the [[System]]
 
 So let's create such [[System]]. 
 
@@ -66,6 +65,9 @@ class MoveSystem : public System{
 		// Move function
 		void Move();
 };
+
+// define alias
+using MoveSystem_Ptr = std::shared_ptr<MoveSystem>;
 
 // source file
 #include "move_system.hpp"
@@ -86,5 +88,100 @@ void MoveSystem::Move(){
 		}
 	}
 }
-
 ```
+
+Then we need to register the [[System]] we just created so we can then use the system and allow [[ECS]] to automatically give a list of entities that have the components the [[System]] needs which is the "Position" component
+```cpp
+#include <ecs/ecs.hpp>
+// include the component defined above
+#include "player_component.hpp"
+// include the system defined above
+#include "move_system.hpp"
+
+void func(){
+	// initialize ECS for app usage
+	// register components
+
+	// register system and get reference of the system
+	MoveSystem_Ptr moveSys = ECS::RegisterSystem<MoveSystem>();
+}
+```
+
+To let [[ECS]] give the entities that have the "Position" component to the [[System]] we created we need to define a signature or a list of components that a [[Entity]] needs to satisfy in order to be included into the [[System]]
+```cpp
+#include <ecs/ecs.hpp>
+// include the component defined above
+#include "player_component.hpp"
+// include the system defined above
+#include "move_system.hpp"
+
+void func(){
+	// initialize ECS for app usage
+	// register components
+	// register system and get reference of the system
+
+	// create signature
+	Signature sig;
+	// give the signature the components 
+	sig.set(ECS::GetComponentType<Position>());
+	// set the system's signature
+	ECS::SetSystemSignature<MoveSystem>(sig);
+}
+
+// alternative
+void func(){
+	// initialize ECS for app usage
+	// register components
+	// register system and get reference of the system
+
+	// set the system's signature
+	ECS::SetSystemSignature<MoveSystem>(
+		ECS::GetComponentType<Position>()
+	);
+}
+```
+
+Now we need a Player [[Entity]] with the component "Position" and to the component set default values
+
+```cpp
+#include <ecs/ecs.hpp>
+// include the component defined above
+#include "player_component.hpp"
+// include the system defined above
+#include "move_system.hpp"
+
+void func(){
+	// initialize ECS for app usage
+	// register components
+	// register system and get reference of the system
+	// set the system's signature
+
+	// create entity
+	Entity Player = ECS::CreateEntity();
+	// give component to entity
+	ECS::AddComponent(Player, Position{.x = 0.0f, .y = 0.0f});
+}
+```
+
+Lastly, we need to call the function of [[System]] called "MoveSystem" to update the Player [[Entity]] so it can move to the right
+```cpp
+#include <ecs/ecs.hpp>
+// include the component defined above
+#include "player_component.hpp"
+// include the system defined above
+#include "move_system.hpp"
+
+void func(){
+	// initialize ECS for app usage
+	// register components
+	// register system and get reference of the system
+	// set the system's signature
+	// create entity
+	// give component to entity
+
+	// update entities with system reference
+	moveSys->Move();
+}
+```
+
+That should be pretty much it for the [[ECS]] in using from scratch, look into [[Tutorial]] on actual application of the [[ECS]] to create a simple game using this engine.
