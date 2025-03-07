@@ -6,9 +6,9 @@ inc/
 	cameras/
 	ecs/
 		types/
-		systems/
+		systems/ <- Pre-constructed ECS systems
 		managers/
-		components/
+		components/ <- Pre-defined ECS components
 	engine/
 		components/
 	glad/ <- Cross-platform OpenGL API

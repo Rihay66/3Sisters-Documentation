@@ -1,4 +1,4 @@
-A System is sort of a manager that is able to access all entities that have a set of specific components that is required by the system in order to manipulate the entities.
+ System is sort of a manager that is able to access all entities that have a set of specific components that is required by the system in order to manipulate the entities.
 
 To define a system it needs to inherit from System and then you can define functions, optionally variables as well, that do something with the added entities that match a signature, or specific set of [[Component]]s
 ```cpp
@@ -25,7 +25,7 @@ class ExampleSystem : public System{
 using ExampleSystem_Ptr = std::shared_ptr<ExampleSystem>;
 ```
 
-To use the alias in C++ is similar to defining a pointer variable
+To use the alias in C++ is similar to defining a variable
 ```cpp
 // create reference to of the system
 ExampleSystem_Ptr ex;
