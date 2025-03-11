@@ -46,10 +46,66 @@ getKeyInput(...);
 
 // call GLFW specific function using the namespace
 GLFW::getKeyInput(...);
+
+// choosing to use SDL
+using namespace SDL;
+
+// call SDL specific function
+getKeyInput(...);
+
+// alternative
+
+// call SDL specific function using the namespace
+SDL::getKeyInput(...);
 ```
 
-(explain how to initialize keyboard)
-(explain how to initialize gamepad)
+When it comes down to initializing **Keyboard Manager** to allow for keyboard input there is a difference between selection of the library:
+
+For [[GLFW keyboard]], you need to pass a reference of the window handle from [[Window-GLFW]]
+```cpp
+void func(){
+	// get window handle from window
+	GLFWwindow* handle = window.getWindowHandle();
+	// give reference of the window handle to the keyboard manager
+	GLFW::KeyboardManager::SetWindowHandle(handle);
+
+	// use keyboard input functions like getKeyInput()...
+}
+```
+For [[SDL keyboard]], you need to pass a reference of the keyboard state holder from [[Window-SDL]]
+```cpp
+void func(){
+	// get keyboard state holder from window
+	KeyboardStateHolder* handle = window.getKeyboardState();
+	// give reference of the keyboard state to the keyboard manager
+	SDL::KeyboardManager::SetKeyboardState(handle);
+
+	// use keyboard input functions like getKeyInput()...
+}
+```
+
+When it comes down to initializing **Gamepad Manager** to allow for game controller input there is a difference between selection of the library:
+
+For [[GLFW Gamepad]]
+```cpp
+void func(){
+	// initialize gamepad query
+	GLFW::GamepadManager::InitializeQuery();
+
+	// set a gamepad component and use component to check for input 
+}
+```
+
+For [[SDL Gamepad]], you need to pass reference of the event state from [[Window-SDL]]
+```cpp
+void func(){
+	// get event state from window
+	SDLEvent& event = window.getEventState();
+	// initialize gamepad query
+	SDL::GamepadManager::InitializeQuery(event);
+}
+```
+
 (give generic examples of using keyboard and gamepad)
 
 
