@@ -84,6 +84,42 @@ void func(){
 }
 ```
 
+The keyboard input gets update by [[Window]] when running the "runtime()" which checks for IO events and without it you can't check for any input from the keyboard
+
+Once the **Keyboard Manager** is initialized you can then use the shortcut input functions which are similar across both libraries GLFW and SDL, however due note that to refer to a key on the keyboard differs between the selection of the library
+
+For [[GLFW keyboard]], 
+	refer to GLFW keyboard tokens: https://www.glfw.org/docs/3.3/group__keys.html
+```cpp
+// using window paradigm
+void init(){
+	// set up keyboard manager
+}
+
+void upadte(){
+	// check for input from the 'D' key of the keyboard
+	if(GLFW::GetKeyInput(GLFW_KEY_D)){
+		// do something...
+	}
+}
+```
+
+For [[SDL keyboard]],
+	refer to SDL keyboard scancode: https://wiki.libsdl.org/SDL2/SDL_Scancode 
+```cpp
+// using window paradigm
+void init(){
+	// set up keyboard manager
+}
+
+void update(){
+	// check for input from the 'D' key of the keyboard
+	if(SDL::GetKeyInput(SDL_SCANCODE_D)){
+		// do something...
+	}
+}
+```
+
 When it comes down to initializing **Gamepad Manager** to allow for game controller input there is a difference between selection of the library:
 
 For [[GLFW Gamepad]]
@@ -106,10 +142,46 @@ void func(){
 }
 ```
 
-(give generic examples of using keyboard and gamepad)
+Similarly, you need to call [[Window]] "runtime()" in order for checking for events detected by the library selected like either GLFW or SDL.
+
+Once the **Gamepad Manager** is initialized you must then create a "Gamepad" component 
+```cpp
+void func(){
+	// initialize gamepad query
+
+	// create gamepad component using SDL as an example (similar when using GLFW)
+	SDL::Gamepad pad;
+
+	// queue the created gamepad to be set
+	SDL::GamepadManager::SetGamepad(pad);
+}
+```
+Due note that there is a difference to how the "Gamepad" components are set
+
+(explain the difference between GLFW and SDL in how the queue works for them)
+For [[GLFW Gamepad]], when using 
 
 
+Then have it in queue to be set by the **Gamepad Manager** and the call the "PollIO()" to let **Gamepad Manager** assigned all queued components, due note it is recommended to call "PollIO()" continously
+```cpp
+void func(){
+	// initialize gamepad query
+	// create gamepad component
+	// queue the created gamepad to be set
+
+	// check IO events, to set the queued gaempad component
+	GamepadManager::PollIO();
+}
+```
+
+Lastly, when connecting a game controller, the "Gamepad" component should have its "isConnected" flag boolean should be **true** meaning its been set successfully. Then you can then use (give example on how to get input from gamepad)
+
+Here are all the input modules separated by the library they use:
+
+GLFW:
 [[GLFW Gamepad]]
 [[GLFW keyboard]]
+
+SDL:
 [[SDL Gamepad]]
 [[SDL keyboard]]
