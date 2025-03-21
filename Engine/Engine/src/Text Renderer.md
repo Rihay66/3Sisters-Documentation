@@ -2,9 +2,11 @@ The Text Renderer is responsible for rendering text given a font and raw data. I
 
 Refer to GLM documentation: 
 * http://glm.g-truc.net/0.9.9/api/modules.html
+
 Refer to OpenGL documentation: 
 * https://www.opengl.org/Documentation/Documentation.html 
 * https://www.khronos.org/opengl/wiki/Main_Page
+
 Refer to GLSL documentation:
 * https://www.khronos.org/opengl/wiki/Core_Language_(GLSL)
 

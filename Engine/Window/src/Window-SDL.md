@@ -2,6 +2,7 @@ The Window-SDL class is responsible for creating a OpenGL context window utilizi
 
 Refer to SDL documentation: 
 * https://wiki.libsdl.org/SDL3/FrontPage
+
 Refer to OpenGL documentation: 
 * https://www.opengl.org/Documentation/Documentation.html 
 * https://www.khronos.org/opengl/wiki/Main_Page

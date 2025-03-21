@@ -3,6 +3,7 @@ The Resource Manager is responsible for handling and managing either loading or 
 Refer to OpenGL documentation: 
 * https://www.opengl.org/Documentation/Documentation.html 
 * https://www.khronos.org/opengl/wiki/Main_Page
+
 Refer to GLSL documentation:
 * https://www.khronos.org/opengl/wiki/Core_Language_(GLSL)
 

@@ -2,6 +2,7 @@ The Camera classes are responsible for calculating an orthographic projection on
 
 Refer to [[Resource Systems]] 
 * [[Shader]]
+
 Refer to GLM documentation: 
 * http://glm.g-truc.net/0.9.9/api/modules.html
 

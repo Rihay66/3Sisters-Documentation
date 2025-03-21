@@ -2,6 +2,7 @@ The Window-GLFW class is responsible for creating a OpenGL context window utiliz
 
 Refer to GLFW documentation: 
 * https://www.glfw.org/docs/latest/ 
+
 Refer to OpenGL documentation: 
 * https://www.opengl.org/Documentation/Documentation.html 
 * https://www.khronos.org/opengl/wiki/Main_Page
