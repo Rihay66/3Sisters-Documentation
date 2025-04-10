@@ -17,7 +17,7 @@ To include a Static Singleton Class in a source or header file can be done simpl
 For example: including a Static Singleton Class like [[Texture Manager]]
 
 ``` cpp
-#include <ResourceSystems/Managers/ResourceManager.hpp>
+#include <resourcesystems/managers/texture_manager.hpp>
 ```
 
 From this point the class [[Texture Manager]] calls its private constructor which only initializes as a static object with its private static variables. However, this means that the static functions can be called without having to keep manual storage of the static object
@@ -25,11 +25,11 @@ From this point the class [[Texture Manager]] calls its private constructor whic
 In C++ to use a static function of a Static Singleton Class can be done as follow:
 
 ```cpp
-#include <resourcesystems/managers/resource_manager.hpp>
+#include <resourcesystems/managers/texture_manager.hpp>
 
 void func(){
 	// rebind all textures to be used by OpenGL
-	ResourceManager::BindTextures();
+	TextureManager::BindTextures();
 }
 ```
 
@@ -180,7 +180,6 @@ For [[GLFW Gamepad]], when setting a gamepad:
 
 For [[SDL Gamepad]], when setting a gamepad: 
 * the manner that it gets set is by when SDL finds all the game controllers it then assigns the gamepad [[Component]] with the highest priority will be set with the first game controller SDL finds and so forth with the rest of the queued up gamepad [[Component]]s.
-
 
 When having the [[Component]] in queue to be set by the **Gamepad Manager** and the call the "PollIO()" to let **Gamepad Manager** assigned all queued components, due note it is recommended to call "PollIO()" continuously
 ```cpp
