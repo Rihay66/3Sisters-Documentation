@@ -6,9 +6,8 @@ inc/
 	cameras/
 	ecs/
 		types/
-		systems/ <- Pre-constructed ECS systems
 		managers/
-		components/ <- Pre-defined ECS components
+		prebuilt_components/ <- Pre-defined ECS components
 	engine/
 		components/
 	glad/ <- Cross-platform OpenGL API
@@ -16,10 +15,9 @@ inc/
 		managers/
 	resourceSystems/
 		managers/
-		types/
 	sound/
 		managers/
-	stb/ <- Image loading STB
+	stb/ <- Image, True Type, and Image Write STB
 	window/
 ```
 
@@ -28,46 +26,48 @@ Resource/Functional modules of the engine are Static Singletons Classes where th
 
 To include a Static Singleton Class in a source or header file can be done simply by including their header. Doing multiple includes makes no difference as long as they're included.
 
-For example: including a Static Singleton Class like [[Resource Manager]]
+For example: including a Static Singleton Class like [[Texture Manager]]
 
 ``` cpp
-#include <ResourceSystems/Managers/ResourceManager.hpp>
+#include <resourcesystems/managers/texture_manager.hpp>
 ```
 
-From this point the class [[Resource Manager]] calls its private constructor which only initializes as a static object with its private static variables.
+From this point the class [[Texture Manager]] calls its private constructor which only initializes as a static object with its private static variables.
 
 In C++ to use a function of a Static Singleton Class can be done as follow:
 
 ```cpp
-#include <resourcesystems/managers/resource_manager.hpp>
+#include <resourcesystems/managers/texture_manager.hpp>
 
 void func(){
 	// rebind all textures to be used by OpenGL
-	ResourceManager::BindTextures();
+	TextureManager::BindTextures();
 }
 ```
 
 However, some of the Static Singleton Classes require more information to be fully used anywhere else so some may need to be used in sequence.
 
-For example: [[Sprite Renderer]] requires a loaded [[Shader]] and optionally a set universal sprite size
+For example: [[Quad Renderer]] requires a loaded [[Shader]] 
 
 ``` cpp
-#include <engine/sprite_renderer.hpp>
+#include <engine/quad_renderer.hpp>
 
 void func(){
 	// load a shader
 	// apply projection calculation to the shader
 	
-	// initialize sprite renderer with a shader and a custom 2D sprite size 
-	SpriteRenderer::Init(shader, {15.0f, 60.0f});
+	// initialize Quad renderer with a shader
+	QuadRenderer::Init(shader);
 }
 ```
 
 Throughout the Documentation of this engine, each the module that are Static Singleton Classes are labelled.
 
 For quick reference, here are the Static Singleton Classes in the engine:
-* [[Resource Manager]]
-* [[Sprite Renderer]]
+* [[Texture Manager]]
+* [[Shader Manager]]
+* [[Quad Renderer]]
+* [[Line Renderer]]
 * [[Text Renderer]]
 * [[Sound Manager]]
 * [[ECS]]
@@ -288,14 +288,11 @@ Systems require to be registered before usage utilizing "RegisterSystem()", this
 ```cpp
 #include <ecs/ecs.hpp>
 
-// utilize existing ECS system
-#include <ecs/systems/ecs_sprite_renderer.hpp>
-
 void func(){
 	// initialize ECS
 	
 	// register system
-	ECS_SpriteRendererPtr renderer = ECS::RegisterSystem<ECS_SpriteRenderer>();
+	ExampleSystem system = ECS::RegisterSystem<ExampleSystem>();
 }
 ```
 
@@ -306,9 +303,6 @@ There are two ways to set up the signatures of a system all using the same funct
 Creating a signature and adding it to the system
 ```cpp
 #include <ecs/ecs.hpp>
-
-// utilize existing ECS system
-#include <ecs/systems/ecs_sprite_renderer.hpp>
 
 // example component with data
 struct ComponentExample{
@@ -332,19 +326,16 @@ void func() {
 	sig.set(ECS::GetComponentType<ComponentExample>());
 	sig.set(ECS::GetComponentType<TestComponent>());
 	// set the system's signatures
-	ECS::SetSystemSignature<ECS_SpriteRenderer>(sig);
+	ECS::SetSystemSignature<ExampleSystem>(sig);
 
 	// use system
-	renderer.render(ts);
+	example.doSomething();
 }
 ```
 
 Setting the signature directly onto function
 ```cpp
 #include <ecs/ecs.hpp>
-
-// utilize existing ECS system
-#include <ecs/systems/ecs_sprite_renderer.hpp>
 
 // example component with data
 struct ComponentExample{
@@ -363,18 +354,18 @@ void func() {
 	// register system
 	
 	// set the system's signatures
-	ECS::SetSystemSignature<ECS_SpriteRenderer>(
+	ECS::SetSystemSignature<ExampleSystem>(
 		ECS::GetComponentType<ComponentExample>(), 
 		ECS::GetComponentType<TestComponent>());
 	
 	// use system
-	renderer.render(ts);
+	example.doSomething();
 }
 ```
 # Inheritance and Virtual Functions
 The following example modules are the classes that either optional or need to be inherited and its functions overwritten to allow for some or further functionality.
 # [[Window]] 
-The Window class is responsible for creating a OpenGL context window which allows for direct/indirect functionality of other components within the engine such as the [[Sprite Renderer]]. 
+The Window class is responsible for creating a OpenGL context window which allows for direct/indirect functionality of other components within the engine such as the [[Quad Renderer]]. 
 
 Not only does this class provide a OpenGL context window it also provides a runtime function that keeps the context window open, provide runtime functions like the "update()" and "Render()"
 
@@ -431,7 +422,7 @@ class AppWindow : public Window{
 
 However, you do need to look out for any differences between the two when it comes down to migrating from one to another as there can be some differences in missing feature or a function requires additional initializing variables or parameters. 
 
-Upon reaching at this point, you should understand what the engine contains and how its ecosystem works. Now you can move onto understanding how each module operates, the list below will be listed in order of importance before heading into [[Usage]] which there we learn how to set up and make a simple game utilizing most the modules of the engine: 
+Upon reaching at this point, you should understand what the engine contains and get an idea on how its ecosystem works. Now you can move onto understanding how each module operates, the list below will be listed in order of importance before heading into [[Usage]] which there we learn how to set up and make a simple game utilizing most the modules of the engine: 
 * [[Window]]
 * [[Resource Systems]]
 * [[ECS]]

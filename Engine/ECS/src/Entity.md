@@ -58,7 +58,7 @@ void func(){
 void func(){
 	// initialize ECS
 	// create an entity
-	// optional: add component to entity=
+	// optional: add component to entity
 
 	// destroy entity
 	ECS::DestroyEntity(entity);

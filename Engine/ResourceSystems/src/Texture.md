@@ -54,7 +54,7 @@ void func(){
 ```
 #### public: BindTexture()
 * used for binding the texture before rendering
-* this function is to allow support for legacy OpenGL as the modules within the Engine don't necessarily utilize the texture ID but the texture ID index generated through the [[Resource Manager]] and seek info about how the texture ID index is used in [[Usage]]
+* this function is to allow support for legacy OpenGL as the modules within the Engine don't necessarily utilize the texture ID but the texture ID index generated through the [[Texture Manager]] and seek info about how the texture ID index is used in [[Usage]]
 ```cpp
 void func(){
 	// retrieve image data from file

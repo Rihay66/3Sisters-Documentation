@@ -14,13 +14,13 @@ Within input system, regardless of choosing either GLFW or SDL, there is the **K
 
 To include a Static Singleton Class in a source or header file can be done simply by including their header. Doing multiple includes makes no difference as long as they're included
 
-For example: including a Static Singleton Class like [[Resource Manager]]
+For example: including a Static Singleton Class like [[Texture Manager]]
 
 ``` cpp
 #include <ResourceSystems/Managers/ResourceManager.hpp>
 ```
 
-From this point the class [[Resource Manager]] calls its private constructor which only initializes as a static object with its private static variables. However, this means that the static functions can be called without having to keep manual storage of the static object
+From this point the class [[Texture Manager]] calls its private constructor which only initializes as a static object with its private static variables. However, this means that the static functions can be called without having to keep manual storage of the static object
 
 In C++ to use a static function of a Static Singleton Class can be done as follow:
 

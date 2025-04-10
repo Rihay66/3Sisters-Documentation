@@ -20,20 +20,21 @@ Within Resource Systems there are managers that well... manage resources and typ
 
 These resource types are Classes that handle doing the calculation, generating, or modifying either texture or shader usable to OpenGL.
 ##### Resource Types Extension:
-* ###### Character
-	* This type contains the texture coordinates of a particular character from a loaded font which can be used for rendering text
+* ###### CharacterSet
+	* This type contains the texture coordinates of all particular characters from a loaded font which can be used for rendering text
 * ###### SubTexture
 	* This type contains the texture coordinates of a texture
 
 These resource types extensions mean that they extend the use of a certain resource type and the ones shown extend from [[Texture]] indirectly as they require just the texture ID that is generated.
-##### Resource Manager
-[[Resource Manager]] - (Requires OpenGL)  handles [[Texture]], [[Shader]], Character, and SubTexture loading and retrieving 
+##### Resource Managers
+[[Texture Manager]] - (Requires OpenGL)  handles [[Texture]], Font, and SubTexture loading and retrieving 
+[[Shader Manager]] - (Requires OpenGL) handles [[Shader]] loading and retrieving
 
-Within the resource manager it manages resources by having them be pointing to a given name and once set it then can be used for retrieving the desired resource. 
+Within these managers they manage resources by having them be pointing to a given name and once set it then can be used for retrieving the desired resource. 
 ```cpp
 void func(){
 	// load and generate a texture from file and give it a name
-	ResourceManager::LoadTexture("cat.png", "Pet");
+	TextureManager::LoadTexture("cat.png", "Pet");
 }
 ```
 
@@ -43,7 +44,7 @@ Now to retrieve the generated texture
 ```cpp
 void func(){
 	// retrieve the texture index to apply to a quad
-	int textureIndex = ResourceManager::GetTextureIndex("Pet");
+	int textureIndex = TextureManager::GetTextureIndex("Pet");
 	
 	// utilize retrieved texture for rendering...
 }
@@ -56,18 +57,18 @@ When compiling your application into an executable program and upon opening you 
 This is because the program wasn't either given a path to the file and/or the file is not within reach of the executable. To properly set this up or fix the issue follow the following:
 
 In the directory of where the application was compiled to should look likes this:
-```
-/build
-	/shaders	  
-	/textures
-		cat.png
-	myapp.exe
-````
+
+	/build
+		/shaders
+		/textures
+			cat.png
+		myapp.exe
+
 In the example above, the executable is within a "build" folder and along side with two other folders "shaders" and "textures". Within the "textures" folder is the texture the program is trying to load is called "cat.png".
 
 In the code of the program the line that's giving the error
 ```cpp
-ResouceManager::LoadTexture("cat.png","cat");
+TextureManager::LoadTexture("cat.png","cat");
 ```
 
 #### There are two ways to fix this:
@@ -81,7 +82,7 @@ Now the program now properly executes, but by organization of the files can get 
 
 ##### Change the line of code that loads the texture to be given a path, so the code would look likes this
 ```cpp	
-ResourceManager::LoadTexture("textures/cat.png", "cat");
+TextureManager::LoadTexture("textures/cat.png", "cat");
 ```
 	
 Now the code properly executes and the organization of the files is much better as the program gets larger we can separate what files are "textures", "shaders", "sound files", or etc.
@@ -89,7 +90,8 @@ Now the code properly executes and the organization of the files is much better 
 Here are all the Resource systems for quick reference:
 [[Texture]]
 [[Shader]]
-[[Resource Systems]]
+[[Texture Manager]]
+[[Shader Manager]]
 
 Other types of resource managers (these don't require OpenGL or a window context)
 [[Sound Manager]] - handles loading and retrieving sound

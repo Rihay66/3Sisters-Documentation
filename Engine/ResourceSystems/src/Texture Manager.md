@@ -1,4 +1,4 @@
-The Resource Manager is responsible for handling and managing either loading or retrieving [[Shader]]s, [[Texture]]s, SubTextures, and Fonts from a given file location. It provides the loaded resources to be available across the runtime of the application, hence this class is a Static Singleton Class. In order for this class to function it needs OpenGL to be initialized before utilizing this class.
+The Texture Manager is responsible for handling and managing either loading or retrieving [[Texture]]s, SubTextures, and Fonts from a given file location. It provides the loaded resources to be available across the runtime of the application, hence this class is a Static Singleton Class. In order for this class to function it needs OpenGL to be initialized before utilizing this class.
 
 Refer to OpenGL documentation: 
 * https://www.opengl.org/Documentation/Documentation.html 
@@ -7,36 +7,36 @@ Refer to OpenGL documentation:
 Refer to GLSL documentation:
 * https://www.khronos.org/opengl/wiki/Core_Language_(GLSL)
 
-### Resource Manager is a Static Singleton Class
+### Texture Manager is a Static Singleton Class
 
 To include a Static Singleton Class in a source or header file can be done simply by including their header. Doing multiple includes makes no difference as long as they're included.
 
-For example: including a Static Singleton Class like [[Resource Manager]]
+For example: including a Static Singleton Class like [[Texture Manager]]
 
 ``` cpp
-#include <ResourceSystems/Managers/ResourceManager.hpp>
+#include <resourcesystems/managers/texture_manager.hpp>
 ```
 
-From this point the class [[Resource Manager]] calls its private constructor which only initializes as a static object with its private static variables. However, this means that the static functions can be called without having to keep manual storage of the static object.
+From this point the class [[Texture Manager]] calls its private constructor which only initializes as a static object with its private static variables. However, this means that the static functions can be called without having to keep manual storage of the static object.
 
 In C++ to use a static function of a Static Singleton Class can be done as follow:
 
 ```cpp
-#include <resourcesystems/managers/resource_manager.hpp>
+#include <resourcesystems/managers/texture_manager.hpp>
 
 void func(){
 	// rebind all textures to be used by OpenGL
-	ResourceManager::BindTextures();
+	TextureManager::BindTextures();
 }
 ```
 
-Within the resource manager it manages resources by having them be pointing to a given name and once set it then can be used for retrieving the desired resource. 
+Within the texture manager it manages resources by having them be pointing to a given name and once set it then can be used for retrieving the desired resource. 
 
 For Example: Load a texture and give it a name
 ```cpp
 void func(){
 	// load and generate a texture from file and give it a name
-	ResourceManager::LoadTexture("cat.png", "Pet");
+	TexutreManager::LoadTexture("cat.png", "Pet");
 }
 ```
 
@@ -46,7 +46,7 @@ For Example: Retrieve the generated texture using the given name
 ```cpp
 void func(){
 	// retrieve the texture index to apply to a quad
-	int textureIndex = ResourceManager::GetTextureIndex("Pet");
+	int textureIndex = TextureManager::GetTextureIndex("Pet");
 	
 	// utilize retrieved texture for rendering...
 }
@@ -57,12 +57,10 @@ Most managers that manage resources utilize this system of storing and retrievin
 Any resource loaded into a Static Singleton Class remains persistent until program exit, which means that resources loaded at the beginning of program initialization can be then accessed at any point in the program thereafter.
 
 ```cpp
-#include <resourcesystems/managers/resource_manager.hpp>
-
 // initialization function that is called at the start of the program
 void init(){
-	// load a texture into ResourceManager
-	ResourceManager::LoadTexture("textures/example.png", "example");
+	// load a texture into TextureManager
+	TextureManager::LoadTexture("textures/example.png", "example");
 }
 
 ...
@@ -70,32 +68,32 @@ void init(){
 // function used at some point in program
 void func(){
 	// get reference of loaded texture
-	Texture& tex = ResourceManager::GetTexture("example");
+	Texture& tex = TextureManager::GetTexture("example");
 }
 ```
 
-For Example: Resource Manager usage across different files
+For Example: Texture Manager usage across different files
 ```cpp
 // texture_getter.hpp
 
-#include <resourcesystems/managers/resource_manager.hpp>
+#include <resourcesystems/managers/texture_manager.hpp>
 
 // declare and define function
 void getTexture(){
-	// retrieve a texture from ResourceManager
-	ResourceManager::GetTexture("example");
+	// retrieve a texture from TextureManager
+	TextureManager::GetTexture("example");
 }
 ```
 
 ```cpp
 //main.cpp
 
-#include <resourcesystems/managers/resource_manager.hpp>
+#include <resourcesystems/managers/texture_manager.hpp>
 #include "texture_getter.hpp"
 
 int main(){
-	// load a texture into ResourceManager
-	ResourceManager::LoadTexture("textures/example.png", "example");
+	// load a texture into TextureManager
+	TextureManager::LoadTexture("textures/example.png", "example");
 	
 	// get the texture
 	getTexture();
@@ -107,14 +105,14 @@ int main(){
 
 Obviously, due note that retrieving something that is being loaded later causes an error as what's being retrieved doesn't exist yet at the point where its being called
 
-For example: Retrieve and then load a texture
+For example: Retrieve and then load a texture of the same name
 ```cpp
 void func(){
-	// retrieve a texture from ResourceManager
-	ResourceManager::GetTexture("example"); //!ERROR: "example" doesn't exist
+	// retrieve a texture from TextureManager
+	TextureManager::GetTexture("example"); //!ERROR: "example" doesn't exist
 	
-	// load a texture into ResourceManager
-	ResourceManager::LoadTexture("textures/example.png", "example");
+	// load a texture into TextureManager
+	TextureManager::LoadTexture("textures/example.png", "example");
 	
 	// from this point and onwards "example" exists
 }
@@ -122,42 +120,32 @@ void func(){
 
 Header location/namespace/class name
 ```cpp
-#include <ResourceSystems/Managers/ResourceManager.hpp>
+#include <resourcesystems/managers/texture_manager.hpp>
 
-class ResourceManager{
+class TextureManager{
 ...
 };
 ```
 ## Class Functions:
-#### static public: LoadShader(const char*, const char*, const char* , std::string) -> returns [[Shader]]&
-* loads (and generates) a shader program from file along with a name, loads the files in this order of vertex, fragment (and geometry) and extracts the shader's source code
-* returns a reference of the loaded/generated shader for external use
-* it is optional to load a geometry shader file, if there is no geometry shader then set as nullptr
-```cpp
-void func(){
-	// load a shader
-	ResourceManager::LoadShader("quad.vs","quad.frag", nullptr, "shader");
-}
-```
 #### static public: LoadTexture(const char*, std::string, bool) -> [[Texture]]&
 * loads (and generates) a texture from file along with a name and optional texture filter option
-* returns a reference of the loaded/generated textyre for external use
+* returns a reference of the loaded/generated texture for external use
 * automatically the given file extension that is given, the function determines if it uses alpha or not
 * by default the texture's filter is set to be nearest and it is optional to set it to true which sets to be linear
 ```cpp
 void func(){
 	// load a texture
-	ResourceManager::LoadTexture("textures/example.png", "example");
+	TextureManager::LoadTexture("textures/example.png", "example");
 }
 ```
-#### static public: LoadFontTexture(const char*, unsigned int, std::string, bool) -> std::map<char, Character>&
-* loads (and generates) a font from file with a font size along with a name and optional texture filter option
-* returns a reference of the map of font characters that are attached to a character for external use
+#### static public: LoadFontTexture(const char*, std::string, bool, std::uint32_t, uint32_t, uint32_t, float, bool) -> CharacterSet&
+* loads (and generates) a font texture from file with a specified resolution of the font texture (width and height) and font size along with name and optional texture filter option
+* returns a reference of the set of font characters for external use
 * by default the texture's filter is set to be nearest and it is optional to set it to true which sets to be linear
 ```cpp
 void func(){
 	// load a font texture
-	ResourceManager::LoadFontTexture("fonts/arial.ttf",12,"font");
+	TextureManager::LoadFontTexture("fonts/arial.ttf","font", 512, 512, 24.0f);
 }
 ```
 #### static public: GenerateSubTexture(std::string, [[Texture]]&, glm::uvec2, glm::uvec2, glm::uvec2) -> returns std::array<glm::vec2, 4>&
@@ -168,7 +156,7 @@ void func(){
 void func(){
 	// load a texture
 	// create a subtexture
-	ResourceManager::GenerateSubTexture("bench", benchesTexture, {0.0f, 5.0f}, 20.0f, 20.0f);
+	TextureManager::GenerateSubTexture("bench", benchesTexture, {0.0f, 5.0f}, 20.0f, 20.0f);
 }
 ```
 #### static public: GenerateWhiteTexture()
@@ -178,33 +166,24 @@ void func(){
 ```cpp
 void func(){
 	// generate white texture
-	ResourceManager::GenerateWhiteTexture();
+	TextureManager::GenerateWhiteTexture();
 	// get the generated texture
-	Texture& tex = ResourceManager::GetTexture("default");
-}
-```
-#### static public: GetShader(std::string) -> [[Shader]]&
-* used to retrieve a stored shader
-```cpp
-void func(){
-	// load a shader
-	// get the shader
-	Shader& shader = ResourceManager::GetShader("quad");
+	Texture& tex = TextureManager::GetTexture("default");
 }
 ```
 #### static public: GetTextureIndex(std::string) -> int
 * retrieves the texture index from a stored texture
-* the index of textures are binded through ResourceManager's BindTexture()
-* useful to [[Sprite Renderer]]
+* the index of textures are binded through QuadManager's BindTexture()
+* useful to [[Quad Renderer]]
 ```cpp
 void func(){
 	// load texture
 	// get the texture index from stored texture
-	int texIndex = ResourceManager::GetTextureIndex("default");
+	int texIndex = TextureManager::GetTextureIndex("default");
 	
 	// example: use the texture index to render a quad with the loaded texture
 	// ...
-	SpriteRenderer::DrawQuad(texIndex, position, size, rotation, color);
+	QuadRenderer::DrawQuad(texIndex, position, size, rotation, color);
 	// ...
 }
 ```
@@ -214,16 +193,16 @@ void func(){
 void func(){
 	// load a texture
 	// get the loaded texture
-	Texture& tex = ResourceManager::GetTexture("default");
+	Texture& tex = TextureManager::GetTexture("default");
 }
 ```
-#### static public: GetFontTexture(std::string) -> returns std::map<char, Character>&
+#### static public: GetFontTexture(std::string) -> returns CharacterSet&
 * used to retrieve a stored font texture map that contains characters and associated font character
 ```cpp
 void func(){
 	// load a font
 	// get the font texture
-	std::map<char, Character>& font = ResourceManager::GetFontTexture("font");
+	CharacterSet& font = TextureManager::GetFontTexture("font");
 }
 ```
 #### static public: GetSubTexture(std::string) -> std::array<glm::vec2, 4>&
@@ -231,21 +210,21 @@ void func(){
 ```cpp
 void func(){
 	// load a texture
-	Texture& tex = ResourceManager::LoadTexture("animals.png","animals");
+	Texture& tex = TextureManager::LoadTexture("animals.png","animals");
 	// generate a sub texture from the loaded texture
-	ResourceManager::GenerateSubTexture("animals", tex, {2.0f, 0.0f}, {5.0f,5.0f});
+	TextureManager::GenerateSubTexture("animals", tex, {2.0f, 0.0f}, {5.0f,5.0f});
 	// get the sub texture
-	std::array<glm::vec2, 4>& texCoords = ResourceManager::GetSubTexture("cat");
+	std::array<glm::vec2, 4>& texCoords = TextureManager::GetSubTexture("cat");
 }
 ```
 #### static public: BindTextures()
-* used to bind all texture (not fonts) from the texture list to be used by OpenGL so then it can be used by a renderer like [[Sprite Renderer]]
+* used to bind all texture (not fonts) from the texture list to be used by OpenGL so then it can be used by a renderer like [[Quad Renderer]]
 * is automatically called by LoadTexture()
 * can be called multiple times
 ```cpp
 void func(){
 	// load a texture
 	// bind all loaded textures, note that LoadTexture already calls this func
-	ResourceManager::BindTextures();
+	TextureManager::BindTextures();
 }
 ```

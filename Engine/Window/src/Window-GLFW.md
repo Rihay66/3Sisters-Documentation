@@ -1,4 +1,4 @@
-The Window-GLFW class is responsible for creating a OpenGL context window utilizing the GLFW library which allows for direct/indirect functionality of other components within the engine such as the [[Sprite Renderer]]. 
+The Window-GLFW class is responsible for creating a OpenGL context window utilizing the GLFW library which allows for direct/indirect functionality of other components within the engine such as the [[Quad Renderer]]. 
 
 Refer to GLFW documentation: 
 * https://www.glfw.org/docs/latest/ 

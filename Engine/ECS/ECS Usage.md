@@ -82,7 +82,7 @@ void MoveSystem::Move(){
 		// grab reference of "Position" component from entity
 		auto& pos = ECS::GetComponent<Position>(entitiy);
 
-		// move the position on x
+		// move the position on x axis
 		if(*insert input checking code here*){
 			pos.x += 1.0f;
 		}

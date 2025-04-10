@@ -5,6 +5,7 @@ To define a system it needs to inherit from System and then you can define funct
 // you can include the ECS header directly 
 #include <ecs/ecs.hpp>
 
+// create an example class that inherits from System
 class ExampleSystem : public System{
 	public:
 		// some function that does something with entities
@@ -17,6 +18,7 @@ Once defining a system we also need a way to refer and call functions from it sa
 // you can include the ECS header directly 
 #include <ecs/ecs.hpp>
 
+// create an example class that inherits from System
 class ExampleSystem : public System{
 	...
 };
@@ -27,10 +29,10 @@ using ExampleSystem_Ptr = std::shared_ptr<ExampleSystem>;
 
 To use the alias in C++ is similar to defining a variable
 ```cpp
-// create reference to of the system
+// create reference of the system
 ExampleSystem_Ptr ex;
 
-// to set the system
+// to set the system, which sets the std::shared_ptr
 ex = some_func();
 
 // to call a function of the system
