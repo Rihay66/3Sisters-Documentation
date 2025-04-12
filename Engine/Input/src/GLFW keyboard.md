@@ -3,7 +3,7 @@ The Keyboard Manager for GLFW is responsible for keeping track of the window han
 Refer to GLFW documentation: 
 * https://www.glfw.org/docs/latest/ 
 
-### KeyboardManager are Singleton Singleton Classes 
+### KeyboardManager is a Singleton Singleton Class 
 
 To include a Static Singleton Class in a source or header file can be done simply by including their header. Doing multiple includes makes no difference as long as they're included
 
@@ -76,7 +76,7 @@ void upadte(){
 
 For using engine macros:
 ```cpp
-// using SDL as an example
+// using GLFW as an example
 // using window paradigm
 void init(){
 	// set up keyboard manager
@@ -84,15 +84,15 @@ void init(){
 
 void update(){
 	// check for input from the 'D' key of the keyboard
-	if(SDL::GetKeyInput(SISTERS_KEY_D)){
+	if(GLFW::GetKeyInput(SISTERS_KEY_D)){
 		// do something...
 	}
 }
 ```
 
-Within the GLFW keyboard there is the **KeyboardManager** and the shortcut input function in separate header locations
+Within the GLFW keyboard there is the **KeyboardManager** and the shortcut input functions in separate header locations
 
-Header location/class name of the **KeyboardManager**:
+Header location/class name:
 ```cpp
 #include <input/managers/sisters_glfw_keyboard_manager.hpp>
 
@@ -104,8 +104,10 @@ class KeyboardManager{
 
 }
 ```
+## Class Functions:
 #### static public: SetWindowHandle(GLFWwindow* handle)
 * set the window handle to be stored as a reference in the keyboard manager
+* which allows for 
 ```cpp
 void func(){
 	// set the window handle
@@ -120,7 +122,7 @@ void func(){
 	GLFWwindow& handle = GLFW::KeyboardManager::GetWindowHandle();
 }
 ```
-
+## Input Functions:
 Header location of the shortcut input functions:
 ```cpp
 #include <input/sisters_glfw_keyboard.hpp>
