@@ -1,30 +1,10 @@
-The Keyboard Manager for GLFW is responsible for keeping track of the window handle which allows for checking for keyboard inputs
+The Keyboard Input for GLFW is made available to be utilized when creating a a class that inherits from [[Window]]
 
 Refer to GLFW documentation: 
 * https://www.glfw.org/docs/latest/ 
 
-### KeyboardManager is a Singleton Singleton Class 
-
-To include a Static Singleton Class in a source or header file can be done simply by including their header. Doing multiple includes makes no difference as long as they're included
-
-For example: including a Static Singleton Class like [[Texture Manager]]
-
-``` cpp
-#include <resourcesystems/managers/texture_manager.hpp>
-```
-
-From this point the class [[Texture Manager]] calls its private constructor which only initializes as a static object with its private static variables. However, this means that the static functions can be called without having to keep manual storage of the static object
-
-In C++ to use a static function of a Static Singleton Class can be done as follow:
-
-```cpp
-#include <resourcesystems/managers/texture_manager.hpp>
-
-void func(){
-	// rebind all textures to be used by OpenGL
-	TextureManager::BindTextures();
-}
-```
+When creating a class that inherits from [[Window]], calling the default "runtime()", and using the window paradigm. You can already utilize the keyboard input functions.
+**DISCLAIMER: overriding "runtime()" means you have to figure out how to check for input on your own and as well renders this page meaningless to read**
 
 To make a selection of a library to allow for input you must make use of their designated namespace. As well due note that you cannot mix library selection between [[Window]] and [[Input]] as it make cause definition errors thus you must have the same library selection throughout the whole application when using the engine 
 ```cpp
@@ -42,96 +22,39 @@ getKeyInput(...);
 GLFW::getKeyInput(...);
 ```
 
-When it comes down to initializing **Keyboard Manager** to allow for keyboard input there is a difference between selection of the library:
-
-For GLFW keyboard, you need to pass a reference of the window handle from [[Window-GLFW]]
-```cpp
-void func(){
-	// get window handle from window
-	GLFWwindow* handle = window.getWindowHandle();
-	// give reference of the window handle to the keyboard manager
-	GLFW::KeyboardManager::SetWindowHandle(handle);
-	
-	// use keyboard input functions like getKeyInput()...
-}
-```
-
-Once the **Keyboard Manager** is initialized you can then use the shortcut input functions which are similar across both libraries GLFW and SDL, however due note that to refer to a key on the keyboard differs between the selection of the library or you can use the engine's keyboard macros.
+When using the keyboard input functions you are allowed to use macros from both official GLFW or Framework.
 
 For GLFW keyboard, 
 	refer to GLFW keyboard tokens: https://www.glfw.org/docs/3.3/group__keys.html
 ```cpp
-// using window paradigm
-void init(){
-	// set up keyboard manager
-}
-
-void upadte(){
+void AppWindow::update(){
 	// check for input from the 'D' key of the keyboard
-	if(GLFW::GetKeyInput(GLFW_KEY_D)){
+	if(GLFW::getKeyInput(GLFW_KEY_D)){
 		// do something...
 	}
 }
 ```
 
-For using engine macros:
+For using Framework macros:
 ```cpp
-// using GLFW as an example
-// using window paradigm
-void init(){
-	// set up keyboard manager
-}
-
-void update(){
+void AppWindow::update(){
 	// check for input from the 'D' key of the keyboard
-	if(GLFW::GetKeyInput(SISTERS_KEY_D)){
+	if(GLFW::getKeyInput(SISTERS_KEY_D)){
 		// do something...
 	}
 }
 ```
 
-Within the GLFW keyboard there is the **KeyboardManager** and the shortcut input functions in separate header locations
-
-Header location/class name:
+Header location:
 ```cpp
-#include <input/managers/sisters_glfw_keyboard_manager.hpp>
+#include <input/sisters_glfw_keyboard.hpp>
 
 namespace GLFW{
-
-class KeyboardManager{
 ...
-};
-
-}
-```
-## Class Functions:
-#### static public: SetWindowHandle(GLFWwindow* handle)
-* set the window handle to be stored as a reference in the keyboard manager
-* which allows for 
-```cpp
-void func(){
-	// set the window handle
-	GLFW::KeyboardManager::SetWindowHandle(handle);
-}
-```
-#### static public: GetWindowHandle() -> returns GLFWwindow&
-* returns the window handle stored to be used externally
-```cpp
-void func(){
-	// get the window handle
-	GLFWwindow& handle = GLFW::KeyboardManager::GetWindowHandle();
 }
 ```
 ## Input Functions:
-Header location of the shortcut input functions:
-```cpp
-#include <input/sisters_glfw_keyboard.hpp>
-namespace GLFW{
-...
-}
-```
-
-List of all defined engine input macros defined for each of the keys on the keyboard, be warned the key codes are from the US keyboard layout, refer to Refer to GLFW documentation https://www.glfw.org/docs/latest/ 
+List of all defined framework input macros defined for each of the keys on the keyboard, be warned the key codes are from the US keyboard layout, refer to GLFW documentation https://www.glfw.org/docs/latest/ 
 
 ```
 #define SISTER_KEY_SPACE 32
@@ -260,7 +183,6 @@ List of all defined engine input macros defined for each of the keys on the keyb
 #### getKeyInput(int) -> bool
 * key callback of the keyboard which checks for the given key
 * checks if key was pressed
-* NOTE: **KeyboardManager** needs to be initialized and window handle set in order for this function to work
 ```cpp
 void func(){
 	// initialize keyboard manager
@@ -275,7 +197,6 @@ void func(){
 #### getKeyInputDown(int) -> bool
 * key callback of the keyboard which checks for the given key
 * checks if key was pressed similar to getKeyInput()
-* NOTE: **KeyboardManager** needs to be initialized and window handle set in order for this function to work
 ```cpp
 void func(){
 	// initialize keyboard manager
@@ -290,7 +211,6 @@ void func(){
 #### getKeyInputUp(int) -> bool
 * key callback of the keyboard which checks for the given key
 * checks if key was released or not being pressed
-* NOTE: **KeyboardManager** needs to be initialized and window handle set in order for this function to work
 ```cpp
 void func(){
 	// initialize keyboard manager

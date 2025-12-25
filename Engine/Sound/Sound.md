@@ -1,4 +1,4 @@
-The Sound is responsible for allowing to load and play audio as well as allowing to manipulate the loaded sound to be louder, have a different pitch, and/or sound like its positioned somewhere in space. The engine utilizes currently OpenAL or OpenAL-Soft backend that allows for playing sound. 
+The Sound is responsible for allowing to load and play audio as well as allowing to manipulate the loaded sound to be louder, have a different pitch, and/or sound like its positioned somewhere in space. The engine utilizes currently OpenAL or OpenAL-Soft back-end that allows for playing sound. 
 
 Refer to OpenAL documentation:
 * https://www.openal.org/documentation/OpenAL_Programmers_Guide.pdf

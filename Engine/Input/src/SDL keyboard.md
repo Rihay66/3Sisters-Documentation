@@ -1,33 +1,12 @@
-The Keyboard Manager for SDL is responsible for keeping track of the window handle which allows for checking for keyboard inputs
+The Keyboard Input for SDL is made available to be utilized when creating a class that inherits from [[Window]]
 
 Refer to SDL documentation: 
 * https://wiki.libsdl.org/SDL3/FrontPage
 
-### KeyboardManager is a Singleton Singleton Class 
-
-To include a Static Singleton Class in a source or header file can be done simply by including their header. Doing multiple includes makes no difference as long as they're included
-
-For example: including a Static Singleton Class like [[Texture Manager]]
-
-``` cpp
-#include <resourcesystems/managers/texture_manager.hpp>
-```
-
-From this point the class [[Texture Manager]] calls its private constructor which only initializes as a static object with its private static variables. However, this means that the static functions can be called without having to keep manual storage of the static object
-
-In C++ to use a static function of a Static Singleton Class can be done as follow:
-
-```cpp
-#include <resourcesystems/managers/texture_manager.hpp>
-
-void func(){
-	// rebind all textures to be used by OpenGL
-	TextureManager::BindTextures();
-}
-```
+When creating a class that inherits from [[Window]], calling the default "runtime()", and using the window paradigm. You can already utilize the keyboard input functions.
+**DISCLAIMER: overriding "runtime()" means you have to figure out how to check for input on your own and as well renders this page meaningless to read**
 
 To make a selection of a library to allow for input you must make use of their designated namespace. As well due note that you cannot mix library selection between [[Window]] and [[Input]] as it make cause definition errors thus you must have the same library selection throughout the whole application when using the engine 
-
 ```cpp
 // example of selecting a library
 
@@ -43,296 +22,167 @@ getKeyInput(...);
 SDL::getKeyInput(...);
 ```
 
-When it comes down to initializing **Keyboard Manager** to allow for keyboard input there is a difference between selection of the library:
+When using the keyboard input functions you are allowed to use macros from both official SDL or Framework provide macros.
 
-For [[SDL keyboard]], you need to pass a reference of the keyboard state holder from [[Window-SDL]]
+For SDL keyboard, 
+	refer to SDL keyboard tokens: https://wiki.libsdl.org/SDL3/SDL_Keycode
 ```cpp
-void func(){
-	// get keyboard state holder from window
-	KeyboardStateHolder* handle = window.getKeyboardState();
-	// give reference of the keyboard state to the keyboard manager
-	SDL::KeyboardManager::SetKeyboardState(handle);
-
-	// use keyboard input functions like getKeyInput()...
-}
-```
-
-Once the **Keyboard Manager** is initialized you can then use the shortcut input functions which are similar across both libraries GLFW and SDL, however due note that to refer to a key on the keyboard differs between the selection of the library or you can use the engine's keyboard macros.
-
-For [[SDL keyboard]],
-	refer to SDL keyboard scancode: https://wiki.libsdl.org/SDL2/SDL_Scancode 
-```cpp
-// using window paradigm
-void init(){
-	// set up keyboard manager
-}
-
-void update(){
+void AppWindow::update(){
 	// check for input from the 'D' key of the keyboard
-	if(SDL::GetKeyInput(SDL_SCANCODE_D)){
+	if(SDL::getKeyInput(SDLK_D)){
 		// do something...
 	}
 }
 ```
 
-For using engine macros:
+For using Framework macros:
 ```cpp
-// using SDL as an example
-// using window paradigm
-void init(){
-	// set up keyboard manager
-}
-
-void update(){
+void AppWindow::update(){
 	// check for input from the 'D' key of the keyboard
-	if(SDL::GetKeyInput(SISTERS_KEY_D)){
+	if(SDL::getKeyInput(SISTERS_KEY_D)){
 		// do something...
 	}
 }
 ```
 
-Within the SDL keyboard there is the **KeyboardManager** and the shortcut input functions in separate header locations
-
-Header location/class name:
+Header location:
 ```cpp
-#include <input/managers/sisters_sdl_keyboard_manager.hpp>
+#include <input/sisters_SDL_keyboard.hpp>
 
 namespace SDL{
-
-class KeyboardManager{
 ...
-};
-
-}
-```
-## Class Functions:
-#### static public: SetKeyboardState(KeyboardStateHolder*)
-* set the keyboard state handle to be stored in the **KeyboardManager**
-* this allows for shortcut input functions be able to check which key was pressed
-* set by grabbing an existing KeyboardStateHolder from [[Window]]
-```cpp
-void func(){
-	// get keyboard state holder from window
-	KeyboardStateHolder* handle = window.getKeyboardState();
-	// give reference of the keyboard state to the keyboard manager
-	SDL::KeyboardManager::SetKeyboardState(handle);
-}
-```
-#### static public:  GetKeyboardState() -> returns KeyboardStateHolder*
-* returns reference of the keyboard state holder
-```cpp
-void func(){
-	// get keyboard state holder from keyboard manager
-	KeyboardStateHolder* state = SDL::KeyboardManager::GetKeyboardState();
 }
 ```
 ## Input Functions:
-Header location of the shortcut input functions:
-```cpp
-#include <input/sisters_sdl_keyboard.hpp>
-namespace SDL{
-...
-}
-```
-List of all defined engine input macros defined for each of the keys on the keyboard, be warned the key codes are from the scancodes in SDL, refer to https://wiki.libsdl.org/SDL2/SDL_Scancode
-```cpp
+List of all defined framework input macros defined for each of the keys on the keyboard, be warned the key codes are from the US keyboard layout, refer to SDL documentation https://wiki.libsdl.org/SDL3/FrontPage
 
-#define SISTER_KEY_UNKNOWN 0
-#define SISTER_KEY_A 4
-#define SISTER_KEY_B 5
-#define SISTER_KEY_C 6
-#define SISTER_KEY_D 7
-#define SISTER_KEY_E 8
-#define SISTER_KEY_F 9
-#define SISTER_KEY_G 10
-#define SISTER_KEY_H 11
-#define SISTER_KEY_I 12
-#define SISTER_KEY_J 13
-#define SISTER_KEY_K 14
-#define SISTER_KEY_L 15
-#define SISTER_KEY_M 16
-#define SISTER_KEY_N 17
-#define SISTER_KEY_O 18
-#define SISTER_KEY_P 19
-#define SISTER_KEY_Q 20
-#define SISTER_KEY_R 21
-#define SISTER_KEY_S 22
-#define SISTER_KEY_T 23
-#define SISTER_KEY_U 24
-#define SISTER_KEY_V 25
-#define SISTER_KEY_W 26
-#define SISTER_KEY_X 27
-#define SISTER_KEY_Y 28
-#define SISTER_KEY_Z 29
-#define SISTER_KEY_1 30
-#define SISTER_KEY_2 31
-#define SISTER_KEY_3 32
-#define SISTER_KEY_4 33
-#define SISTER_KEY_5 34
-#define SISTER_KEY_6 35
-#define SISTER_KEY_7 36
-#define SISTER_KEY_8 37
-#define SISTER_KEY_9 38
-#define SISTER_KEY_0 39
-#define SISTER_KEY_RETURN 40
-#define SISTER_KEY_ESCAPE 41
-#define SISTER_KEY_BACKSPACE 42
-#define SISTER_KEY_TAB 43
-#define SISTER_KEY_SPACE 44
-#define SISTER_KEY_MINUS 45
-#define SISTER_KEY_EQUALS 46
-#define SISTER_KEY_LEFTBRACKET 47
-#define SISTER_KEY_RIGHTBRACKET 48
-/**< Located at the lower left of the return
- *   key on ISO keyboards and at the right end
- *   of the QWERTY row on ANSI keyboards.
- *   Produces REVERSE SOLIDUS (backslash) and
- *   VERTICAL LINE in a US layout REVERSE
- *   SOLIDUS and VERTICAL LINE in a UK Mac
- *   layout NUMBER SIGN and TILDE in a UK
- *   Windows layout DOLLAR SIGN and POUND SIGN
- *   in a Swiss German layout NUMBER SIGN and
- *   APOSTROPHE in a German layout GRAVE
- *   ACCENT and POUND SIGN in a French Mac
- *   layout and ASTERISK and MICRO SIGN in a
- *   French Windows layout.
- */
-#define SISTER_KEY_BACKSLASH 49
-#define SISTER_KEY_NONUSHASH 50
-/**< ISO USB keyboards actually use this code                           \
- *   instead of 49 for the same key but all                             \
- *   OSes I've seen treat the two codes                                 \
- *   identically. So as an implementor unless                           \
- *   your keyboard generates both of those                              \
- *   codes and your OS treats them differently                          \
- *   you should generate #define SISTER_KEY_BACKSLASH                   \
- *   instead of this code. As a user you                                \
- *   should not rely on this code because #define SISTER                \
- *   will never generate it with most (all?)                            \
- *   keyboards.                                                         \
- */
-#define SISTER_KEY_SEMICOLON 51
-#define SISTER_KEY_APOSTROPHE 52
-#define SISTER_KEY_GRAVE 53
-/**< Located in the top left corner (on both ANSI                       \
- *   and ISO keyboards). Produces GRAVE ACCENT and                      \
- *   TILDE in a US Windows layout and in US and UK                      \
- *   Mac layouts on ANSI keyboards GRAVE ACCENT                         \
- *   and NOT SIGN in a UK Windows layout SECTION                        \
- *   SIGN and PLUS-MINUS SIGN in US and UK Mac                          \
- *   layouts on ISO keyboards SECTION SIGN and                          \
- *   DEGREE SIGN in a Swiss German layout (Mac:                         \
- *   only on ISO keyboards) CIRCUMFLEX ACCENT and                       \
- *   DEGREE SIGN in a German layout (Mac: only on                       \
- *   ISO keyboards) SUPERSCRIPT TWO and TILDE in a                      \
- *   French Windows layout COMMERCIAL AT and                            \
- *   NUMBER SIGN in a French Mac layout on ISO                          \
- *   keyboards and LESS-THAN SIGN and GREATER-THAN                      \
- *   SIGN in a Swiss German German or French Mac                        \
- *   layout on ANSI keyboards.                                          \
- */
-#define SISTER_KEY_COMMA 54
-#define SISTER_KEY_PERIOD 55
-#define SISTER_KEY_SLASH 56
-#define SISTER_KEY_CAPSLOCK 57
-#define SISTER_KEY_F1 58
-#define SISTER_KEY_F2 59
-#define SISTER_KEY_F3 60
-#define SISTER_KEY_F4 61
-#define SISTER_KEY_F5 62
-#define SISTER_KEY_F6 63
-#define SISTER_KEY_F7 64
-#define SISTER_KEY_F8 65
-#define SISTER_KEY_F9 66
-#define SISTER_KEY_F10 67
-#define SISTER_KEY_F11 68
-#define SISTER_KEY_F12 69
-#define SISTER_KEY_PRINTSCREEN 70
-#define SISTER_KEY_SCROLLLOCK 71
-#define SISTER_KEY_PAUSE 72
-/**< insert on PC help on some Mac keyboards (but                       \
-  does send code 73 not 117) */
-#define SISTER_KEY_INSERT 73 
-#define SISTER_KEY_HOME 74
-#define SISTER_KEY_PAGEUP 75
-#define SISTER_KEY_DELETE 76
-#define SISTER_KEY_END 77
-#define SISTER_KEY_PAGEDOWN 78
-#define SISTER_KEY_RIGHT 79
-#define SISTER_KEY_LEFT 80
-#define SISTER_KEY_DOWN 81
-#define SISTER_KEY_UP 82
-/**< num lock on PC clear on Mac keyboards                              \
- */
-#define SISTER_KEY_NUMLOCKCLEAR 83
-#define SISTER_KEY_KP_DIVIDE 84
-#define SISTER_KEY_KP_MULTIPLY 85
-#define SISTER_KEY_KP_MINUS 86
-#define SISTER_KEY_KP_PLUS 87
-#define SISTER_KEY_KP_ENTER 88
-#define SISTER_KEY_KP_1 89
-#define SISTER_KEY_KP_2 90
-#define SISTER_KEY_KP_3 91
-#define SISTER_KEY_KP_4 92
-#define SISTER_KEY_KP_5 93
-#define SISTER_KEY_KP_6 94
-#define SISTER_KEY_KP_7 95
-#define SISTER_KEY_KP_8 96
-#define SISTER_KEY_KP_9 97
-#define SISTER_KEY_KP_0 98
-#define SISTER_KEY_KP_PERIOD 99
-/**< This is the additional key that ISO                               \
- *   keyboards have over ANSI ones                                     \
- *   located between left shift and Y.                                 \
- *   Produces GRAVE ACCENT and TILDE in a                              \
- *   US or UK Mac layout REVERSE SOLIDUS                               \
- *   (backslash) and VERTICAL LINE in a                                \
- *   US or UK Windows layout and                                       \
- *   LESS-THAN SIGN and GREATER-THAN SIGN                              \
- *   in a Swiss German German or French                                \
- *   layout. */
-#define SISTER_KEY_APPLICATION 101 
-/**< windows contextual menu compose */
-#define SISTER_KEY_NONUSBACKSLASH 100
-/**< The USB document says this is a status flag                       \
- *   not a physical key - but some Mac keyboards                       \
- *   do have a power key. */
-#define SISTER_KEY_POWER 102
-#define SISTER_KEY_KP_EQUALS 103
-#define SISTER_KEY_F13 104
-#define SISTER_KEY_F14 105
-#define SISTER_KEY_F15 106
-#define SISTER_KEY_F16 107
-#define SISTER_KEY_F17 108
-#define SISTER_KEY_F18 109
-#define SISTER_KEY_F19 110
-#define SISTER_KEY_F20 111
-#define SISTER_KEY_F21 112
-#define SISTER_KEY_F22 113
-#define SISTER_KEY_F23 114
-#define SISTER_KEY_F24 115
-#define SISTER_KEY_EXECUTE 116
-#define SISTER_KEY_HELP 117 /**< AL Integrated Help Center */
-#define SISTER_KEY_MENU 118 /**< Menu (show menu) */
-#define SISTER_KEY_SELECT 119
-#define SISTER_KEY_STOP 120  /**< AC Stop */
-#define SISTER_KEY_AGAIN 121 /**< AC Redo/Repeat */
-#define SISTER_KEY_UNDO 122  /**< AC Undo */
-#define SISTER_KEY_CUT 123   /**< AC Cut */
-#define SISTER_KEY_COPY 124  /**< AC Copy */
-#define SISTER_KEY_PASTE 125 /**< AC Paste */
-#define SISTER_KEY_FIND 126  /**< AC Find */
-#define SISTER_KEY_MUTE 127
-#define SISTER_KEY_VOLUMEUP 128
-#define SISTER_KEY_VOLUMEDOWN 129
-#define SISTER_KEY_KP_COMMA 133
-#define SISTER_KEY_KP_EQUALSAS400 134
+```
+#define SISTER_KEY_SPACE 32
+#define SISTER_KEY_APOSTROPHE 39 /* ' */
+#define SISTER_KEY_COMMA 44 /* , */
+#define SISTER_KEY_MINUS 45 /* - */
+#define SISTER_KEY_PERIOD 46 /* . */
+#define SISTER_KEY_SLASH 47 /* / */
+#define SISTER_KEY_0 48
+#define SISTER_KEY_1 49
+#define SISTER_KEY_2 50
+#define SISTER_KEY_3 51
+#define SISTER_KEY_4 52
+#define SISTER_KEY_5 53
+#define SISTER_KEY_6 54
+#define SISTER_KEY_7 55
+#define SISTER_KEY_8 56
+#define SISTER_KEY_9 57
+#define SISTER_KEY_SEMICOLON 59 /* ; */
+#define SISTER_KEY_EQUAL 61 /* = */
+#define SISTER_KEY_A 65
+#define SISTER_KEY_B 66
+#define SISTER_KEY_C 67
+#define SISTER_KEY_D 68
+#define SISTER_KEY_E 69
+#define SISTER_KEY_F 70
+#define SISTER_KEY_G 71
+#define SISTER_KEY_H 72
+#define SISTER_KEY_I 73
+#define SISTER_KEY_J 74
+#define SISTER_KEY_K 75
+#define SISTER_KEY_L 76
+#define SISTER_KEY_M 77
+#define SISTER_KEY_N 78
+#define SISTER_KEY_O 79
+#define SISTER_KEY_P 80
+#define SISTER_KEY_Q 81
+#define SISTER_KEY_R 82
+#define SISTER_KEY_S 83
+#define SISTER_KEY_T 84
+#define SISTER_KEY_U 85
+#define SISTER_KEY_V 86
+#define SISTER_KEY_W 87
+#define SISTER_KEY_X 88
+#define SISTER_KEY_Y 89
+#define SISTER_KEY_Z 90
+#define SISTER_KEY_LEFT_BRACKET 91 /* [ */
+#define SISTER_KEY_BACKSLASH 92 /* \ */
+#define SISTER_KEY_RIGHT_BRACKET 93 /* ] */
+#define SISTER_KEY_GRAVE_ACCENT 96 /* ` */
+#define SISTER_KEY_WORLD_1 161 /* non-US #1 */
+#define SISTER_KEY_WORLD_2 162 /* non-US #2 */
+#define SISTER_KEY_ESCAPE 256
+#define SISTER_KEY_ENTER 257
+#define SISTER_KEY_TAB 258
+#define SISTER_KEY_BACKSPACE 259
+#define SISTER_KEY_INSERT 260
+#define SISTER_KEY_DELETE 261
+#define SISTER_KEY_RIGHT 262
+#define SISTER_KEY_LEFT 263
+#define SISTER_KEY_DOWN 264
+#define SISTER_KEY_UP 265
+#define SISTER_KEY_PAGE_UP 266
+#define SISTER_KEY_PAGE_DOWN 267
+#define SISTER_KEY_HOME 268
+#define SISTER_KEY_END 269
+#define SISTER_KEY_CAPS_LOCK 280
+#define SISTER_KEY_SCROLL_LOCK 281
+#define SISTER_KEY_NUM_LOCK 282
+#define SISTER_KEY_PRINT_SCREEN 283
+#define SISTER_KEY_PAUSE 284
+#define SISTER_KEY_F1 290
+#define SISTER_KEY_F2 291
+#define SISTER_KEY_F3 292
+#define SISTER_KEY_F4 293
+#define SISTER_KEY_F5 294
+#define SISTER_KEY_F6 295
+#define SISTER_KEY_F7 296
+#define SISTER_KEY_F8 297
+#define SISTER_KEY_F9 298
+#define SISTER_KEY_F10 299
+#define SISTER_KEY_F11 300
+#define SISTER_KEY_F12 301
+#define SISTER_KEY_F13 302
+#define SISTER_KEY_F14 303
+#define SISTER_KEY_F15 304
+#define SISTER_KEY_F16 305
+#define SISTER_KEY_F17 306
+#define SISTER_KEY_F18 307
+#define SISTER_KEY_F19 308
+#define SISTER_KEY_F20 309
+#define SISTER_KEY_F21 310
+#define SISTER_KEY_F22 311
+#define SISTER_KEY_F23 312
+#define SISTER_KEY_F24 313
+#define SISTER_KEY_F25 314
+#define SISTER_KEY_KP_0 320
+#define SISTER_KEY_KP_1 321
+#define SISTER_KEY_KP_2 322
+#define SISTER_KEY_KP_3 323
+#define SISTER_KEY_KP_4 324
+#define SISTER_KEY_KP_5 325
+#define SISTER_KEY_KP_6 326
+#define SISTER_KEY_KP_7 327
+#define SISTER_KEY_KP_8 328
+#define SISTER_KEY_KP_9 329
+#define SISTER_KEY_KP_DECIMAL 330
+#define SISTER_KEY_KP_DIVIDE 331
+#define SISTER_KEY_KP_MULTIPLY 332
+#define SISTER_KEY_KP_SUBTRACT 333
+#define SISTER_KEY_KP_ADD 334
+#define SISTER_KEY_KP_ENTER 335
+#define SISTER_KEY_KP_EQUAL 336
+#define SISTER_KEY_LEFT_SHIFT 340
+#define SISTER_KEY_LEFT_CONTROL 341
+#define SISTER_KEY_LEFT_ALT 342
+#define SISTER_KEY_LEFT_SUPER 343
+#define SISTER_KEY_RIGHT_SHIFT 344
+#define SISTER_KEY_RIGHT_CONTROL 345
+#define SISTER_KEY_RIGHT_ALT 346
+#define SISTER_KEY_RIGHT_SUPER 347
+#define SISTER_KEY_MENU 348
+#define SISTER_KEY_LAST SISTER_KEY_MENU
 ```
 
 #### getKeyInput(int) -> bool
 * key callback of the keyboard which checks for the given key
 * checks if key was pressed
-* NOTE: **KeyboardManager** needs to be initialized and window handle set in order for this function to work
 ```cpp
 void func(){
 	// initialize keyboard manager
@@ -347,7 +197,6 @@ void func(){
 #### getKeyInputDown(int) -> bool
 * key callback of the keyboard which checks for the given key
 * checks if key was pressed similar to getKeyInput()
-* NOTE: **KeyboardManager** needs to be initialized and window handle set in order for this function to work
 ```cpp
 void func(){
 	// initialize keyboard manager
@@ -362,7 +211,6 @@ void func(){
 #### getKeyInputUp(int) -> bool
 * key callback of the keyboard which checks for the given key
 * checks if key was released or not being pressed
-* NOTE: **KeyboardManager** needs to be initialized and window handle set in order for this function to work
 ```cpp
 void func(){
 	// initialize keyboard manager

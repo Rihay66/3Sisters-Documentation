@@ -39,6 +39,28 @@ void AppWindow::func(){
 	setFixedTimeStep(1.0f/60.0f);	
 }
 ```
+#### protected: setMouseWheelStopSpeed(float)
+* used to set the mouse wheel stop speed
+* either allow to be more floating or exact when there's mouse wheel input
+* Default: value for mouse wheel stop speed is 0.25
+```cpp
+// in order to utilize function must use inheritance
+void AppWindow::func(){
+	// change how fast the mouse wheel input
+	setMouseWheelStopSpeed(0.25f);
+}
+```
+#### protected: setMouseWheelStopDeadzone(float)
+* used to set the mouse wheel stop deadzone
+* when to start detecting mouse wheel input
+* the default value for mouse wheel stop deadzone is 0.5
+```cpp
+// in order to utilize function must use inheritance
+void AppWindow::func(){
+	// change when to stop detecting input
+	setMouseWheelStopDeadzone(0.5f);
+}
+```
 #### protected virtual: additionalWindowOptions()
 * used for adding additional SDL window hints
 * this function gets called by initializeWindow()
@@ -65,6 +87,65 @@ void AppWindow::setUpOpenGL(){
 	// example: set up rendering for 2D
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+}
+```
+#### protected virtual: additionalEventHandling(SDL_Event*)
+* used for adding additional functionality when polling events
+```cpp
+// in order to utilize function must use inheritance
+void AppWindow::additionalEventHandling(SDL_Event* event){
+	// used to handle any additional SDL events
+	
+	// Example: polling a cliboard event
+	switch(event.type){
+		case SDL_EVENT_CLIPBOARD_UPDATE:
+			// Do something...
+			break;
+		default:
+			break;
+	}
+}
+```
+#### protected:  getFrameDuration() -> returns double
+* used to retrieve how long a frame took
+* variable is **only** populated by runtime(), unless overwrite of runtime() makes use of the variable
+```cpp
+void func(){
+	// create a class object that inherits from Window
+	AppWindow window;
+	
+	// initialize the window with a size of 800x600
+	window.initializeWindow(800, 600);
+	
+	// call runtime
+	window.runtime();
+}
+
+// in order to utilize function must use inheritance
+void AppWindow::func(){
+	// retrieve length of frame
+	double frame_length = getFrameDuration();
+}
+```
+#### protected:  getCurrentFrame() -> returns double
+* used to retrieve the current frame
+* variable is **only** populated by runtime(), unless overwrite of runtime() makes use of the variable
+```cpp
+void func(){
+	// create a class object that inherits from Window
+	AppWindow window;
+	
+	// initialize the window with a size of 800x600
+	window.initializeWindow(800, 600);
+	
+	// call runtime
+	window.runtime();
+}
+
+// in order to utilize function must use inheritance
+void AppWindow::func(){
+	// retrieve length of frame
+	double frame_length = getCurrentFrame();
 }
 ```
 #### public virtual: getDeltaTime() -> returns float

@@ -65,6 +65,48 @@ void AppWindow::setUpOpenGL(){
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
 ```
+#### protected:  getFrameDuration() -> returns double
+* used to retrieve how long a frame took
+* variable is **only** populated by runtime(), unless overwrite of runtime() makes use of the variable
+```cpp
+void func(){
+	// create a class object that inherits from Window
+	AppWindow window;
+	
+	// initialize the window with a size of 800x600
+	window.initializeWindow(800, 600);
+	
+	// call runtime
+	window.runtime();
+}
+
+// in order to utilize function must use inheritance
+void AppWindow::func(){
+	// retrieve length of frame
+	double frame_length = getFrameDuration();
+}
+```
+#### protected:  getCurrentFrame() -> returns double
+* used to retrieve the current frame
+* variable is **only** populated by runtime(), unless overwrite of runtime() makes use of the variable
+```cpp
+void func(){
+	// create a class object that inherits from Window
+	AppWindow window;
+	
+	// initialize the window with a size of 800x600
+	window.initializeWindow(800, 600);
+	
+	// call runtime
+	window.runtime();
+}
+
+// in order to utilize function must use inheritance
+void AppWindow::func(){
+	// retrieve length of frame
+	double frame_length = getCurrentFrame();
+}
+```
 #### public virtual: initializeWindow(int, int, const char*)
  * used to initialize the window and it's contexts by default initializes GLFW and creates a Window with OpenGL 4.5 capabilities
  * sets the window handle context which can be retrieved

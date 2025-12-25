@@ -49,11 +49,23 @@ void func(){
 	// do something with created entity...
 }
 ```
-
+#### public: GetEntitySignature([[Entity]]) -> returns Signature
+* used to get an existing entity's component signature
+* help for identifying all the components within given entity
+```cpp
+void func(){
+	// initialize ECS
+	// create an entity
+	// add a component to entity
+	
+	// get signature from entity
+	Signature sig = ECS::GetEntitySignature(entity);
+}
+```
 #### public: DestroyEntity([[Entity]])
 * used to destroy a given entity
 * it also removes all components attached to that entity
-* avoid storing important data or pointers in components that are then onto the entity as it will be lost and may cause a segfault when trying to access the pointer that was on the entity
+* avoid storing important data or pointers in components that are then stored onto the entity as it will be lost and may cause a segfault when trying to access the pointer that was on the entity
 ```cpp
 void func(){
 	// initialize ECS

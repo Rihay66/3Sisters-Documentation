@@ -2,22 +2,22 @@ The Window is responsible for creating a OpenGL context window which allows for 
 
 The Window class is an abstract class meaning YOU HAVE TO inherit this class which means creating a class that inherits from Window in order to make use of it.
 
-For example App class inherits from Window
+For example AppWindow class inherits from Window
 ```cpp
-// app.hpp
+// app_window.hpp
 // recommend to place classes in headers and define functions in source
 
 // since both GLFW and SDL versions the Window class is named the same way
-// to differentiate this namespace usage is required
-// example: use the GLFW window version module 
+// to differentiate use of namespace is required
+// example: use the GLFW window version 
 using namespace GLFW;
 
-class App : public Window{
+class AppWindow : public Window{
 	private:
 	
 	public:
 		// constructor
-		App();
+		AppWindow();
 };
 ```
 Inside the class there are functions that are required to be overridden which then allows for specifying your own code to make the app do something and those functions or paradigm pattern is:
@@ -32,14 +32,14 @@ So it should look like this:
 
 Header
 ```cpp
-// app.hpp
+// app_window.hpp
 
-class App : public Window{
+class AppWindow : public Window{
 	private:
 	
 	public:
 		// constructor
-		App();
+		AppWindow();
 		// override window functions
 		void init() override;
 		void stepUpdate(double ts) override;
@@ -50,29 +50,29 @@ class App : public Window{
 
 Source
 ```cpp
-#include <app.hpp>
+#include "app_window.hpp"
 
 // define constructor, also call Window constructor
-App::App() : Window(){
+AppWindow::AppWindow() : Window(){
 
 }
 
 // define window functions
 
-void App::init(){
-	// initialze resources, players, or systems
+void AppWindow::init(){
+	// initialize resources, players, or systems
 }
 
-void App::stepUpdate(double ts){
+void AppWindow::stepUpdate(double ts){
 	// fixed update
 }
 
-void App::update(){
+void AppWindow::update(){
 	// update
 }
 
-void App::render(double ts){
-	// render something
+void AppWindow::render(double ts){
+	// render cool stuff 
 }
 ```
 
@@ -88,11 +88,11 @@ Since the window class is the basis for engine, in order to start using it we ne
 
 To put it all together in a main function
 ```cpp
-#include <app.hpp>
+#include "app_window.hpp"
 
 int main(){
 	// initialize class obj
-	App app;
+	AppWindow app;
 	
 	// initialize the window with a size of 800x600 with the name "My App"
 	app.initializeWindow(800, 600, "My App");

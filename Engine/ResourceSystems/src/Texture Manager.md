@@ -131,7 +131,7 @@ class TextureManager{
 * loads (and generates) a texture from file along with a name and optional texture filter option
 * returns a reference of the loaded/generated texture for external use
 * automatically the given file extension that is given, the function determines if it uses alpha or not
-* by default the texture's filter is set to be nearest and it is optional to set it to true which sets to be linear
+* by default the texture's filter is set to be nearest and it is optional to set it to **true** which sets to be linear
 ```cpp
 void func(){
 	// load a texture
@@ -141,7 +141,7 @@ void func(){
 #### static public: LoadFontTexture(const char*, std::string, bool, std::uint32_t, uint32_t, uint32_t, float, bool) -> CharacterSet&
 * loads (and generates) a font texture from file with a specified resolution of the font texture (width and height) and font size along with name and optional texture filter option
 * returns a reference of the set of font characters for external use
-* by default the texture's filter is set to be nearest and it is optional to set it to true which sets to be linear
+* by default the texture's filter is set to be nearest and it is optional to set it to **true** which sets to be linear
 ```cpp
 void func(){
 	// load a font texture

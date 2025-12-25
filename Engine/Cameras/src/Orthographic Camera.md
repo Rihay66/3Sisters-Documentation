@@ -76,10 +76,10 @@ void func(){
 ```
 #### public virtual: calculateProjectionView([[Shader]]&)
 * does calculations of the view and projection to create the ProjectionView and set to given [[Shader]]
-	* The vertex [[Shader]] must contain this variable:
-		```glsl 
-		uniform mat4 projectionView;
-		```
+* The vertex [[Shader]] must contain this variable:
+```glsl 
+uniform mat4 projectionView;
+```
 * it allow for updating the [[Shader]]'s projectionView variable
 * can be overwritten 
 ```cpp

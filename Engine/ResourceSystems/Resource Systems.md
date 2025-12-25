@@ -13,7 +13,7 @@ int main(){
 }
 ```
 
-Within Resource Systems there are managers that well... manage resources and types that are specific to a graphical application or program. Before heading into learning what each manager or type does, you should know how to utilize Static Singleton Classes which you can find here [[3 Sisters-Engine]] as any manager that manages any kind of resource is typically a Static Singleton Class unless stated otherwise.
+Within Resource Systems there are managers that well... manage resources and types that are specific to a graphical application or program. Before heading into learning what each manager or type does, you should know how to utilize Static Singleton Classes which you can find here [[3 Sisters-Framework-Engine]] as any manager that manages any kind of resource is typically a Static Singleton Class unless stated otherwise.
 ##### Resource Types
 [[Texture]] - (Requires OpenGL) handles generating a texture given data that is extracted from an image file
 [[Shader]] - (Requires OpenGL) handles compiling shader code given from shader files such as a vertex, fragment, or geometry shader. It also contains functions to change values of the given shader

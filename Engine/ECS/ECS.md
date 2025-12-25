@@ -67,6 +67,20 @@ void func(){
 }
 ```
 
+#### public: GetEntitySignature([[Entity]]) -> returns Signature
+* used to get an existing entity's component signature
+* help for identifying all the components within given entity
+```cpp
+void func(){
+	// initialize ECS
+	// create an entity
+	// add a component to entity
+	
+	// get signature from entity
+	Signature sig = ECS::GetEntitySignature(entity);
+}
+```
+
 #### public: DestroyEntity([[Entity]])
 * used to destroy a given entity
 * it also removes all components attached to that entity
@@ -248,6 +262,79 @@ void func(){
 }
 ```
 
+
+#### public: GetComponentSignature<'T'>() -> returns Signature
+* used to retrieve the signature of given [[Component]]
+* ComponentType is a uint8_t where each bit belongs to a registered component, which is then stored into a signature format
+* if the component is not registered then it will return an error
+```cpp
+// define components
+// EX: the following components are used as example
+struct Position{
+	float x, y;
+};
+
+void func(){
+	// initialize ECS
+	// register component
+	
+	// get signature from registered component
+	Signature sig = ECS::GetComponentSignature<Position>();
+}
+```
+
+#### public: GetMultiComponentSignature(ComponentTypes ...) -> returns Signature
+* used to retrieve the signature of given component types
+* ComponentType is a uint8_t where each bit belongs to a registered component, which is then stored into a signature format
+* if the component is not registered then it will return an error
+```cpp
+// define components
+// EX: the following components are used as example
+struct Position{
+	float x, y;
+};
+
+struct Material{
+	float r, g, b;
+};
+
+void func(){
+	// initialize ECS
+	// register components
+	
+	// get signature from registered components
+	Signature sig = ECS::GetMultiComponentSignature(
+		ECS::GetComponentType<Position>(),
+		ECS::GetComponentType<Material>()
+	);
+}
+```
+
+#### public: GetComponentSignatureBit<'T'>() -> unsigned int
+* used to retrieve the bit location that the given component belongs to
+* if the component is not registered then it will return an error
+```cpp
+// define components
+// EX: the following components are used as example
+struct Position{
+	float x, y;
+};
+
+struct Material{
+	float r, g, b;
+};
+
+void func(){
+	// initialize ECS
+	// register component
+	
+	// get signature from registered components
+	unsigned int pos_sig_bit = ECS::GetComponentSignatureBit<Position>();
+	unsigned int mat_sig_bit = ECS::GetComponentSignatureBit<Material>();
+	// The value of pos_sig_bit is 1 in decimal or ...000000000001 in binary
+	// The value of mat_sig_bit is 2 in decimal or ...000000000010 in binary
+}
+```
 #### public: RegisterSystem<'T'>() -> returns std::shared_ptr<'T'>
 * used to register a [[System]] and it as well returns the [[System]] reference for external use
 * returns nullptr if the [[System]] is already registered
