@@ -24,7 +24,7 @@ SDL::getButtonInput(...);
 
 You need to call [[Window]] "runtime()" in order for checking for events detected such as when connecting or disconnecting a controller by the library selected like either GLFW or SDL.
 
-Once the [[Window]] is initialized you must then create a "Gamepad" component 
+Once the [[Window]] is initialized you must then create a "Gamepad" component to then be able to check for input from that component
 ```cpp
 void func(){
 	// create gamepad component using SDL as an example (similar when using SDL)

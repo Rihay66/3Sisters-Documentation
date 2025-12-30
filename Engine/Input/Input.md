@@ -6,7 +6,8 @@ Refer to GLFW documentation:
 Refer to SDL documentation: 
 * https://wiki.libsdl.org/SDL3/FrontPage
 
-To make sure of the input system, either keyboard, mouse, or 
+	When creating a class that inherits from [[Window]], calling the default "runtime()", and using the window paradigm. You can already utilize the keyboard, mouse, and controller input functions.
+**DISCLAIMER: overriding "runtime()" means you have to figure out how to check for input on your own and as well renders this page meaningless to read**
 
 To make a selection of a library to allow for input, either GLFW or SDL, you must make use of their designated namespace. As well due note that you cannot mix library selection between [[Window]] and [[Input]] as it make cause definition errors thus you must have the same library selection throughout the whole application when using the engine 
 ```cpp
@@ -35,44 +36,13 @@ getKeyInput(...);
 SDL::getKeyInput(...);
 ```
 
-When it comes down to initializing **Keyboard Manager** to allow for keyboard input there is a difference between selection of the library:
-
-For [[GLFW keyboard]], you need to pass a reference of the window handle from [[Window-GLFW]]
-```cpp
-void func(){
-	// get window handle from window
-	GLFWwindow* handle = window.getWindowHandle();
-	// give reference of the window handle to the keyboard manager
-	GLFW::KeyboardManager::SetWindowHandle(handle);
-
-	// use keyboard input functions like getKeyInput()...
-}
-```
-For [[SDL keyboard]], you need to pass a reference of the keyboard state holder from [[Window-SDL]]
-```cpp
-void func(){
-	// get keyboard state holder from window
-	KeyboardStateHolder* handle = window.getKeyboardState();
-	// give reference of the keyboard state to the keyboard manager
-	SDL::KeyboardManager::SetKeyboardState(handle);
-
-	// use keyboard input functions like getKeyInput()...
-}
-```
-
-The keyboard input gets update by [[Window]] when running the "runtime()" which checks for IO events and without it you can't check for any input from the keyboard
-
-Once the **Keyboard Manager** is initialized you can then use the shortcut input functions which are similar across both libraries GLFW and SDL, however due note that to refer to a key on the keyboard differs between the selection of the library or you can use the engine's keyboard macros.
+### Keyboard
+The keyboard input gets updated by [[Window]] when running the "runtime()" which checks for IO events and without it you can't check for any input from the keyboard
 
 For [[GLFW keyboard]], 
 	refer to GLFW keyboard tokens: https://www.glfw.org/docs/3.3/group__keys.html
 ```cpp
-// using window paradigm
-void init(){
-	// set up keyboard manager
-}
-
-void upadte(){
+void update(){
 	// check for input from the 'D' key of the keyboard
 	if(GLFW::GetKeyInput(GLFW_KEY_D)){
 		// do something...
@@ -83,11 +53,6 @@ void upadte(){
 For [[SDL keyboard]],
 	refer to SDL keyboard scancode: https://wiki.libsdl.org/SDL2/SDL_Scancode 
 ```cpp
-// using window paradigm
-void init(){
-	// set up keyboard manager
-}
-
 void update(){
 	// check for input from the 'D' key of the keyboard
 	if(SDL::GetKeyInput(SDL_SCANCODE_D)){
@@ -98,12 +63,6 @@ void update(){
 
 For using engine macros:
 ```cpp
-// using SDL as an example
-// using window paradigm
-void init(){
-	// set up keyboard manager
-}
-
 void update(){
 	// check for input from the 'D' key of the keyboard
 	if(SDL::GetKeyInput(SISTERS_KEY_D)){
@@ -111,89 +70,96 @@ void update(){
 	}
 }
 ```
+### Mouse
+For Mouse inputs, work similarly to Keyboard inputs though **DUE NOTE**: there are few differences between SDL and GLFW versions though their functionality are exactly the same
 
-When it comes down to initializing **Gamepad Manager** to allow for game controller input there is a difference between selection of the library:
+### Gamepad
+The gamepad get updated by [[Window]] when running the "runtime()" which checks for connected, disconnected, and input for any valid controller.
 
-For [[GLFW Gamepad]]
+Similarly, once the [[Window]] is initialized you must then create a "Gamepad" component to then be able to check for input from that component
 ```cpp
 void func(){
-	// initialize gamepad query
-	GLFW::GamepadManager::InitializeQuery();
-
-	// set a gamepad component and use component to check for input 
-}
-```
-
-For [[SDL Gamepad]], you need to pass reference of the event state from [[Window-SDL]]
-```cpp
-void func(){
-	// get event state from window
-	SDLEvent& event = window.getEventState();
-	// initialize gamepad query
-	SDL::GamepadManager::InitializeQuery(event);
-}
-```
-
-Similarly, you need to call [[Window]] "runtime()" in order for checking for events detected by the library selected like either GLFW or SDL.
-
-Once the **Gamepad Manager** is initialized you must then create a "Gamepad" component 
-```cpp
-void func(){
-	// initialize gamepad query
-
-	// create gamepad component using SDL as an example (similar when using GLFW)
+	// create gamepad component using SDL as an example (similar when using SDL)
 	SDL::Gamepad pad;
 
 	// queue the created gamepad to be set
-	SDL::GamepadManager::SetGamepad(pad);
+	SDL::SetGamepad(&pad);
 }
 ```
-Due note that there is a difference to how the "Gamepad" [[Component]] is set when using either GLFW or SDL.
 
-For [[GLFW Gamepad]], when setting a gamepad: 
-* the manner that it gets set is by within a array from 0 to 15 and when GLFW finds all the game controllers it assigns them starting from 0 and so on depending on how many controllers are connected. Upon disconnecting a controller, rest of the assigned index of other controllers remains the same, however when reconnecting or adding a new controller it replaces the lowest index that isn't occupied by another controller. 
+Lastly, when connecting a game controller, the "Gamepad" component should have its "isConnected" flag boolean should be **true** meaning its been set successfully. Then you can then use any input functions which are named the same for both libraries, GLFW or SDL. To refer to a button or joystick from a controller you can check the commercial controller button and joystick macros or the engine's universal macros
 
-For [[SDL Gamepad]], when setting a gamepad: 
-* the manner that it gets set is by when SDL finds all the game controllers it then assigns the gamepad [[Component]] with the highest priority will be set with the first game controller SDL finds and so forth with the rest of the queued up gamepad [[Component]]s.
-
-When having the [[Component]] in queue to be set by the **Gamepad Manager** and the call the "PollIO()" to let **Gamepad Manager** assigned all queued components, due note it is recommended to call "PollIO()" continuously
+For using GLFW macros:
+* For buttons refer to GLFW Documentation https://www.glfw.org/docs/latest/group__gamepad__buttons.html
+* For axis refer to GLFW Documentation https://www.glfw.org/docs/latest/group__gamepad__axes.html
+For using SDL macros:
+* For buttons refer to SDL Documentation: https://wiki.libsdl.org/SDL3/SDL_GamepadButton 
+* For axis refer to SDL Documentation: https://wiki.libsdl.org/SDL3/SDL_GamepadAxis
 ```cpp
 void func(){
-	// initialize gamepad query
-	// create gamepad component
+	// created a gamepad component
 	// queue the created gamepad to be set
-
-	// check IO events of game controllers
-	GamepadManager::PollIO();
-}
-```
-
-Lastly, when connecting a game controller, the "Gamepad" component should have its "isConnected" flag boolean should be **true** meaning its been set successfully. Then you can then use the input functions which are the same for both libraries, GLFW or SDL. To refer to a button or joystick from a controller you can check [[GLFW Gamepad]] or [[SDL Gamepad]] as well the engine's universal macros
-
-**DUE NOTE**: the input macros are built around modern and commercial controllers like Playstation, Xbox, and Nintendo and controllers with additional buttons or features aren't fully supported, however do refer to SDL documentation on how to do so as the engine does expose the SDL library.
-
-```cpp
-// using SDL as an example, and is similar doing so in GLFW
-void func(){
 	
-	// initialize gamepad query
-	// create gamepad component
-	// queue the created gamepad to be set
-	// check IO events of game controllers
-
-	// check for input, note the button macro
-	if(SDL::getButtonInput(gamepad, PLAYSTATION_BUTTON_CROSS)){
+	//** Assuming a gamepad is connected and is set
+	
+	// example: checking for button input
+	if(SDL::getButtonInput(&pad, SDL_GAMEPAD_BUTTON_SOUTH)){
+		// do something...
+	}
+	// example: checking for axis input
+	if(SDL::getAxisInput(&pad, SDL_GAMEPAD_AXIS_LEFTX) > 0.0f){
 		// do something...
 	}
 }
 ```
+
+For using Framework macros:
+```cpp
+void func(){
+	// created a gamepad component
+	// queue the created gamepad to be set
+	
+	//** Assuming a gamepad is connected and is set
+	
+	// example: checking for button input
+	if(SDL::getButtonInput(&pad, SISTER_BUTTON_SOUTH)){
+		// do something...
+	}
+	// example: checking for axis input
+	if(SDL::getAxisInput(&pad, SISTER_JOYSTICK_LEFT_X) > 0.0f){
+		// do something...
+	}
+}
+```
+There is also available, if it makes it easier to read, platform specific macros also provided from the Framework macros as well
+```cpp
+void func(){
+	// created a gamepad component
+	// queue the created gamepad to be set
+	
+	//** Assuming a gamepad is connected and is set
+	
+	// example: checking for button input
+	if(SDL::getButtonInput(&pad, PLAYSTATION_BUTTON_SQUARE)){
+		// do something...
+	}
+	// example: checking for axis input
+	if(SDL::getAxisInput(&pad, XBOX_RIGHT_TRIGGER) > 0.0f){
+		// do something...
+	}
+}
+```
+
+**DUE NOTE**: the input macros are built around modern and commercial controllers like Playstation, Xbox, and Nintendo however controllers with additional buttons or features aren't fully supported, however do refer to SDL or GLFW documentation on how to do so as the engine does expose the SDL and GLFW libraries.
 
 Here are all the input modules separated by library:
 
 GLFW:
 [[GLFW Gamepad]]
 [[GLFW keyboard]]
+[[GLFW Mouse]]
 
 SDL:
 [[SDL Gamepad]]
 [[SDL keyboard]]
+[[SDL Mouse]]
