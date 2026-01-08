@@ -7,7 +7,7 @@ To include a Static Singleton module in a source or header file can be done simp
 For example: including a Static Singleton module like [[Texture Manager]]
 
 ``` cpp
-#include <ResourceSystems/Managers/ResourceManager.hpp>
+#include <resourcesystems/managers/resource_manager>
 ```
 
 From this point the class [[Texture Manager]] calls its private constructor which only initializes as static object with its private static variables.
