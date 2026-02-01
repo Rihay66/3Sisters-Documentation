@@ -1,4 +1,4 @@
-The Sound Manager is responsible for handling and managing in setting up audio device, loading sound files, and managing sound sources. It also provides sound buffers (loaded sound files) and sound sources to be access at anytime across the runtime of the application. It is required to have first an audio device setup before doing anything else.
+The Sound Manager is responsible for handling and managing in setting up audio device, loading sound files, and managing sound sources. It also provides sound buffers (loaded sound files) and sound sources to be access at anytime across the runtime of the application. It is required to have first an audio device setup before doing anything else through OpenAL.
 
 Refer to OpenAL documentation:
 * https://www.openal.org/documentation/OpenAL_Programmers_Guide.pdf
@@ -86,7 +86,6 @@ void func(){
 	SoundSource source = SoundManager::CreateSoundSource("music_player");
 }
 ```
-
 
 Header location/namespace/class name
 ```cpp
